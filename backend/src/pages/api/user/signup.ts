@@ -38,6 +38,10 @@ const signup = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+
+function register(req: NextApiRequest, res: NextApiResponse) {
+  throw new Error("Function not implemented.");
+}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -47,7 +51,8 @@ export default async function handler(
     case "GET":
       break;
     case "POST":
-      signup(req, res);
+      // signup(req, res);
+      register(req, res);
       break;
     case "PATCH":
       break;
@@ -58,3 +63,4 @@ export default async function handler(
       break;
   }
 }
+
