@@ -43,3 +43,14 @@ model User {
 model test {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 }
+
+
+model Job {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  company     String
+  position    String
+  date        String
+  location    String
+  desc        String
+  tags        String[]
+}
