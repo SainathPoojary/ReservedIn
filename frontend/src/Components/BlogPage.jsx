@@ -7,11 +7,26 @@ import Navbar from "./Navbar";
 function BlogPage() {
   const navigate = useNavigate();
   const getBlogs =async  () => {
-    const blogs = await fetch("http://localhost:3000/api/blog/");
+    const blogs = await fetch("https://backend-coderizzz.vercel.app/api/blog/",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      mode: "cors",
+      body: JSON.stringify({
+        title: "Hello",
+      }),
+    }
+
+    );
+
     const blogsJson = await blogs.json();
     console.log(blogsJson);
     return blogsJson;
   }
+
 
   return (
     <div>
