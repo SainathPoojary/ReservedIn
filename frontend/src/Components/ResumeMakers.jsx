@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import "../App.css";
+// import "../App.css";
 import "./Resume.css";
 import { FaPhone } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
@@ -161,149 +161,184 @@ function ResumeMaker() {
     });
     const htmlContent = resume_preview_ref.current.innerHTML;
     doc.html(htmlContent, {
-      callback(doc) {
-        doc.save(uname + "-resume");
+      callback: function (doc) {
+        doc.save("resume.pdf");
       },
+      x: 100,
+      y: 100,
+
+      windowWidth: 100,
+      windowHeight: 100,
+
+      html2canvas: {
+        scale: 0.37,
+      },
+      
+
+
     });
   };
   return (
-    <div className="resume_maker_container">
-      <p className="text-4xl font-bold text-center">Create your resume here</p>
-      <div id="input_fields_container">
-        <form>
-          <h3 className="input_labels">Name</h3>
-          <h3 className="input_labels" style={{ marginLeft: "47%" }}>
-            Qualifications
-          </h3>
-          <br></br>
+    <div className="flex justify-center  ">
+      <div className="rounded  shadow-lg p-20 text-2xl">
+        <p className="text-2xl font-bold text-center space-x-5">
+          Create your resume here
+        </p>
+        <div className="  flex justify-between">
+          <div id="input_fields_container" className="space-y-6 space-x-2">
+            <form>
+              <div className="flex justify-between">
+                <div className="w-1/2">
+                  <h3 className="input_labels">Name</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="first_name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    onFocus={() => start_mic("name")}
+                    value={uname}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <h3 className="input_labels">Qualifications</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="last_name"
+                    onChange={(e) => {
+                      setQual(e.target.value);
+                    }}
+                    onFocus={() => start_mic("qualification")}
+                    value={qual}
+                  />
+                </div>
+              </div>
 
-          <input
-            type="text"
-            className="inputs"
-            id="first_name"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            // onMouseMove={() => {
-            //   start_mic("name");
-            // }}
-            onFocus={() => start_mic("name")}
-            value={uname}
-          />
+              <div className="flex justify-between">
+                <div className="w-1/2">
+                  <h3 className="input_labels">Hobbies</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="first_name"
+                    onChange={(e) => {
+                      setHobbies(e.target.value);
+                    }}
+                    onFocus={() => start_mic("hobby")}
+                    value={hobbies}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <h3 className="input_labels">Achievements</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="last_name"
+                    onChange={(e) => {
+                      setAchieves(e.target.value);
+                    }}
+                    onClick={() => start_mic("achievements")}
+                    value={achieves}
+                  />
+                </div>
+              </div>
 
-          <input
-            type="text"
-            className="inputs"
-            id="last_name"
-            onChange={(e) => {
-              setQual(e.target.value);
-            }}
-            onFocus={() => start_mic("qualification")}
-            value={qual}
-          />
+              <div className="flex justify-between">
+                <div className="w-1/2">
+                  <h3 className="input_labels">Interested in</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="first_name"
+                    onChange={(e) => {
+                      setInterests(e.target.value);
+                    }}
+                    onClick={() => start_mic("interest")}
+                    value={interests}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <h3 className="input_labels">Disability Type</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="last_name"
+                    onChange={(e) => {
+                      setDisabilities(e.target.value);
+                    }}
+                    onClick={() => start_mic("disability type")}
+                    value={disability}
+                  />
+                </div>
+              </div>
 
-          <h3 className="input_labels">Hobbies</h3>
-          <h3 className="input_labels" style={{ marginLeft: "45%" }}>
-            Achievements
-          </h3>
-          <br></br>
-          <input
-            type="text"
-            className="inputs"
-            id="first_name"
-            onChange={(e) => {
-              setHobbies(e.target.value);
-            }}
-            onFocus={() => start_mic("hobby")}
-            value={hobbies}
-          />
-          <input
-            type="text"
-            className="inputs"
-            id="last_name"
-            onChange={(e) => {
-              setAchieves(e.target.value);
-            }}
-            onClick={() => start_mic("achievments")}
-            value={achieves}
-          />
+              <div className="flex justify-between">
+                <div className="w-1/2">
+                  <h3 className="input_labels">Email</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="first_name"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    onClick={() => start_mic("email id")}
+                    value={email}
+                  />
+                </div>
+                <div className="w-1/2">
+                  <h3 className="input_labels">Contact No</h3>
+                  <input
+                    type="text"
+                    className="inputs"
+                    id="last_name"
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                    }}
+                    onClick={() => start_mic("contact number")}
+                    value={contact}
+                  />
+                </div>
+              </div>
 
-          <h3 className="input_labels">Interested in</h3>
-          <h3 className="input_labels" style={{ marginLeft: "42.2%" }}>
-            Disability Type
-          </h3>
-          <br></br>
-          <input
-            type="text"
-            className="inputs"
-            id="first_name"
-            onChange={(e) => {
-              setInterests(e.target.value);
-            }}
-            onClick={() => start_mic("interest")}
-            value={interests}
-          />
-          <input
-            type="text"
-            className="inputs"
-            id="last_name"
-            onChange={(e) => {
-              setDisabilities(e.target.value);
-            }}
-            onClick={() => start_mic("disability type")}
-            value={disability}
-          />
-          <br></br>
+              <div className="flex justify-center space-x-5">
+                <input
+                  type="submit"
+                  className="bg-blue-600 p-1.5 text-white rounded-md ml-1 hover:bg-blue-700"
+                  id="submit_btn"
+                ></input>
+                <button
+                  className="bg-blue-600 p-1.5 text-white rounded-md ml-1 hover:bg-blue-700"
+                  onClick={handleGeneratePDF}
+                >
+                  Generate PDF
+                </button>
+              </div>
+            </form>
+          </div>
 
-          <h3 className="input_labels">Email</h3>
-          <h3 className="input_labels" style={{ marginLeft: "47.5%" }}>
-            Contact No
-          </h3>
-          <br></br>
-          <input
-            type="text"
-            className="inputs"
-            id="first_name"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            onClick={() => start_mic("email id")}
-            value={email}
-          />
-          <input
-            type="text"
-            className="inputs"
-            id="last_name"
-            onChange={(e) => {
-              setContact(e.target.value);
-            }}
-            onClick={() => start_mic("contact number")}
-            value={contact}
-          />
-
-          <input type="submit" id="submit_btn" />
-          <button
-            className="bg-blue-600 p-1.5 text-white rounded-md ml-1'"
-            onClick={handleGeneratePDF}
-          >
-            Generate PDF
-          </button>
-        </form>
-      </div>
-      <div id="preview_container" ref={resume_preview_ref}>
-        <h1 className="text-center text-2xl bg-blue-600 rounded-sm text-white">
-          {uname}
-        </h1>
-        <div id="details_div">
-          <p>Qualifications: {qual}</p>
-          <p>Hobbies: {hobbies}</p>
-          <br />
-          <p>Achievements: {achieves}</p>
-          <p>Interested in: {interests}</p>
-          <br />
-          <p>Disability Type: {disability}</p>
-          <p>Email: {email}</p>
-          <p>Contact No: {contact}</p>
+          <div id="preview_container flex justify-center  max-w-full p-10 space-x-20" ref={resume_preview_ref}>
+            <h1 className="text-center text-2xl bg-blue-600 rounded-sm text-white">
+              {uname}
+            </h1>
+            <div id="details_div">
+              <p>Qualifications: {qual}</p>
+              <br />
+              <p>Hobbies: {hobbies}</p>
+              <br />
+              <p>Achievements: {achieves}</p>
+              <br />
+              <p>Interested in: {interests}</p>
+              <br />
+              <p>Disability Type: {disability}</p>
+              <br />
+              <p>Email: {email}</p>
+              <br />
+              <p>Contact No: {contact}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
