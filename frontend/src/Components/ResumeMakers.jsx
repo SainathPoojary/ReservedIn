@@ -64,14 +64,29 @@ function ResumeMaker() {
   const [contact, setContact] = useState("");
   const [value, setValue] = useState("");
 
+  let status = 0;
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   function mic(field) {
+    if (status == 1) {
+      status = 0;
+      recognition.stop();
+    }
+
+    //delay(10000);
     recognition.start();
+    status = 1;
     recognition.onresult = (event) => {
+      status = 0;
+      let speak = "What is your " + field;
       //handle result in here
-      let word = event.results[0][0].transcript;
+      var word = event.results[0][0].transcript;
       switch (field) {
         case "name":
+          //  if (word != speak) {
           setName(word);
+          //  }
           break;
         case "qualification":
           setQual(word);
@@ -97,39 +112,44 @@ function ResumeMaker() {
         default:
           return null;
       }
+      recognition.stop();
+    };
+
+    recognition.onspeechend = (event) => {
+      status = 0;
+      recognition.stop();
     };
   }
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  async function start_mic(field) {
+    // var fields = [
+    //   "name",
+    //   "qualification",
+    //   "hobby",
+    //   "achievements",
+    //   "interest",
+    //   "disability type",
+    //   "email id",
+    //   "contact number",
+    // ];
+    // for (let field of fields) {
+    let speak = "What is your " + field + "?";
+    var msg = new SpeechSynthesisUtterance();
 
-  async function start_mic() {
-    var fields = [
-      "name",
-      "qualification",
-      "hobby",
-      "achievements",
-      "interest",
-      "disability type",
-      "email id",
-      "contact number",
-    ];
-    for (let field of fields) {
-      let speak = "What is your " + field + "?";
-      var msg = new SpeechSynthesisUtterance();
-
-      msg.text = speak;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(msg);
-      mic(field);
-      await delay(7000);
-    }
+    msg.text = speak;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(msg);
+    // window.speechSynthesis.cancel();
+    await delay(2000);
+    mic(field);
   }
+  //}
 
-  useEffect(() => {
-    delay(3000).then(() => {
-      start_mic();
-    });
-  }, []);
+  // useEffect(() => {
+  //   delay(3000).then(() => {
+  //     start_mic();
+  //   });
+  // }, []);
 
   const resume_preview_ref = useRef();
 
@@ -139,7 +159,8 @@ function ResumeMaker() {
       format: "a4",
       unit: "px",
     });
-    doc.html(resume_preview_ref.current, {
+    const htmlContent = resume_preview_ref.current.innerHTML;
+    doc.html(htmlContent, {
       callback(doc) {
         doc.save(uname + "-resume");
       },
@@ -155,6 +176,7 @@ function ResumeMaker() {
             Qualifications
           </h3>
           <br></br>
+
           <input
             type="text"
             className="inputs"
@@ -162,9 +184,13 @@ function ResumeMaker() {
             onChange={(e) => {
               setName(e.target.value);
             }}
-            onClick={() => mic("name")}
+            // onMouseMove={() => {
+            //   start_mic("name");
+            // }}
+            onFocus={() => start_mic("name")}
             value={uname}
           />
+
           <input
             type="text"
             className="inputs"
@@ -172,7 +198,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setQual(e.target.value);
             }}
-            onClick={() => mic("qualification")}
+            onFocus={() => start_mic("qualification")}
             value={qual}
           />
 
@@ -188,7 +214,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setHobbies(e.target.value);
             }}
-            onClick={() => mic("hobby")}
+            onFocus={() => start_mic("hobby")}
             value={hobbies}
           />
           <input
@@ -198,7 +224,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setAchieves(e.target.value);
             }}
-            onClick={() => mic("achievments")}
+            onClick={() => start_mic("achievments")}
             value={achieves}
           />
 
@@ -214,7 +240,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setInterests(e.target.value);
             }}
-            onClick={() => mic("interest")}
+            onClick={() => start_mic("interest")}
             value={interests}
           />
           <input
@@ -224,7 +250,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setDisabilities(e.target.value);
             }}
-            onClick={() => mic("disability type")}
+            onClick={() => start_mic("disability type")}
             value={disability}
           />
           <br></br>
@@ -241,7 +267,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            onClick={() => mic("email id")}
+            onClick={() => start_mic("email id")}
             value={email}
           />
           <input
@@ -251,7 +277,7 @@ function ResumeMaker() {
             onChange={(e) => {
               setContact(e.target.value);
             }}
-            onClick={() => mic("contact number")}
+            onClick={() => start_mic("contact number")}
             value={contact}
           />
 
@@ -264,7 +290,7 @@ function ResumeMaker() {
           </button>
         </form>
       </div>
-      <div id="preview_container">
+      <div id="preview_container" ref={resume_preview_ref}>
         <h1 className="text-center text-2xl bg-blue-600 rounded-sm text-white">
           {uname}
         </h1>
