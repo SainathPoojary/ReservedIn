@@ -7,20 +7,21 @@ import Navbar from "./Navbar";
 function BlogPage() {
   const navigate = useNavigate();
   const getBlogs =async  () => {
-    const blogs = await fetch("https://backend-coderizzz.vercel.app/api/blog/",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+    const blogs = await fetch("http://localhost:4000/api/blog",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
       },
-      mode: "cors",
-      body: JSON.stringify({
-        title: "Hello",
-      }),
-    }
-
-    );
+      body:JSON.stringify({
+        "title":"Hello",
+        "desc":"This is a test blog",
+        "author":"Saksham",
+        "position":"Student",
+        "genre":["Technology","Science"],
+        "date":"2021-07-30",
+        "audio":"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+      })
+    });
 
     const blogsJson = await blogs.json();
     console.log(blogsJson);
