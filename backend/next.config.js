@@ -1,15 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    domains: ["localhost"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-        port: "",
-      },
-    ],
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+});
+module.exports = withPWA({
+  experimental: {
+    appDir: true,
   },
-};
-
-module.exports = nextConfig;
+  images: {
+    domains: ["miro.medium.com"],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+});
