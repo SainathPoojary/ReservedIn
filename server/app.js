@@ -45,6 +45,7 @@ app.post("/api/blog", async (req, res) => {
     if (!(title && content && author)) {
       res.status(400).send("All input is required");
     }
+    res.send("Hello Worldpost method")
   } catch (err) {
     console.log(err);
     res.status(500).send("Something went wrong");
