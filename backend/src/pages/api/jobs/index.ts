@@ -13,22 +13,22 @@ const getAllJobs = async (req, res) => {
   }
 };
 
-const createJob = async (req, res) => {
-  try {
-    const { title, description, location, salary } = req.body;
-    const job = await prisma.job.create({
-      data: {
-        title,
-        description,
-        location,
-        salary,
-      },
-    });
-    res.status(200).json({ job });
-  } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
-  }
-}
+// const createJob = async (req, res) => {
+//   try {
+//     const { title, description, location, salary } = req.body;
+//     const job = await prisma.job.create({
+//       data: {
+//         title,
+//         description,
+//         location,
+//         salary,
+//       },
+//     });
+//     res.status(200).json({ job });
+//   } catch (error) {
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// }
 
 export default async function handler(
   req: NextApiRequest,
