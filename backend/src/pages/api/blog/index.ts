@@ -1,4 +1,4 @@
-import CreateBlog from "@/app/create/page";
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../utils/db";
 
