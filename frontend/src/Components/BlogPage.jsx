@@ -6,6 +6,12 @@ import Navbar from "./Navbar";
 
 function BlogPage() {
   const navigate = useNavigate();
+  const getBlogs =async  () => {
+    const blogs = await fetch("http://localhost:3000/api/blog/");
+    const blogsJson = await blogs.json();
+    console.log(blogsJson);
+    return blogsJson;
+  }
 
   return (
     <div>
@@ -20,6 +26,9 @@ function BlogPage() {
             >
               Audible Blogs
             </a>
+            <button className="text-black " onClick={()=>{
+            getBlogs();
+          }}>Hello</button>Audible
             <p className="mt-2 text-lg leading-8 text-gray-600">
               Don't only read the blogs, now listen them too!
             </p>
