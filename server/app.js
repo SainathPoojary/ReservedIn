@@ -38,18 +38,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/blog", async (req, res) => {
-  try {
-    const { title, content, author } = req.body;
-
-    // validate the fields
-    if (!(title && content && author)) {
-      res.status(400).send("All input is required");
-    }
-    res.send("Hello Worldpost method")
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Something went wrong");
-  }
+  res.send("Hello World PoSt")
 
 });
 app.get("/api/blog", async (req, res) => {

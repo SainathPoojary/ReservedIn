@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 function BlogPage() {
   const navigate = useNavigate();
   const getBlogs =async  () => {
-    const blogs = await fetch("https://rubix24-code-rizzz-tmup.vercel.app/",{
+    const blogs = await fetch("https://rubix24-code-rizzz-tmup.vercel.app/api/blog",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
