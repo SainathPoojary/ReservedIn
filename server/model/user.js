@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  firstname: {
-    type: String,
-    default: null,
-  },
-  lastname: {
+  name: {
     type: String,
     default: null,
   },
@@ -19,6 +15,35 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
   },
+  contact: {
+    type: Number,
+    default: null,
+  },
+  disabilityType: {
+    type: String,
+    default: null,
+  },
+  disabilityPercentage: {
+    type: Number,
+    default: null,
+  },
+  disabilityProof: {
+    type: String,
+    default: null,
+  },
+  skills: {
+    type: [String],
+    default: null,
+  },
+  videoId: {
+    type: String,
+    default: null,
+  },
+  pin:{
+    type: String,
+    default: null,
+  }
+
 });
 
 const User = mongoose.model("user", userSchema);

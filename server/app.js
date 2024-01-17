@@ -46,9 +46,9 @@ app.get("/api/blog", async (req, res) => {
 });
 app.post("/register", async (req, res) => {
   try {
-    const { firstname, lastname, email, password } = req.body;
+    const { name, email, password, contact, disabilityType, disabilityPercentage, disabilityProof,skills,videoId , pin} = req.body;
     // validate the fields
-    if (!(email && password && firstname && lastname)) {
+    if (!(email && password && name)) {
       res.status(400).send("All input is required");
     }
 
@@ -64,10 +64,16 @@ app.post("/register", async (req, res) => {
 
     // create user in our database
     const user = await User.create({
-      firstname: firstname.toLowerCase().trim(),
-      lastname: lastname.toLowerCase().trim(),
+      name : name,
       password: encryptedPassword,
       email: email.toLowerCase().trim(),
+      contact: contact,
+      disabilityType: disabilityType,
+      disabilityPercentage: disabilityPercentage,
+      disabilityProof: disabilityProof,
+      skills: skills,
+      videoId: videoId,
+      pin: pin
     });
 
     // create token
@@ -125,6 +131,7 @@ app.post("/login", async (req, res) => {
 
     user.token = token;
     user.password = undefined;
+    user.pin = undefined;
 
     const option = {
       expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
@@ -136,8 +143,24 @@ app.post("/login", async (req, res) => {
   res.status(400).send("Invalid Credentials");
 });
 
+app.get("/video/getId/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    const user =  await User.findOne({ videoId: id });
+    if (!user) return res.status(404).send("User not found");
+    user.password = undefined;
+    
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
 app.get("/dashboard", auth, async (req, res) => {
   const { email } = req.user;
+
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).send("User not found");
@@ -157,5 +180,87 @@ app.get("/logout", (req, res) => {
     res.status(500).send("Something went wrong");
   }
 });
+
+
+
+
+
+//blogs
+const Blog = require("./model/blogs");
+const Comment = require("./model/comments");
+
+app.get("/api/blogs", async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    res.status(200).json(blogs);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.get("/api/blogs/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    res.status(200).json(blog);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.post("/api/blogs", async (req, res) => {
+  try {
+    const { authors, index, tags, text, timestamp, title, url, authorImage, authorId, user, comments } = req.body;
+    // console.log(a);
+    const blog = await Blog.create({
+      authors: authors,
+      index: index,
+      tags: tags,
+      text: text,
+      timestamp: timestamp,
+      title: title,
+      url: url,
+      authorImage: authorImage,
+      authorId: authorId,
+      user: user,
+      comments: comments
+    });
+    res.status(201).json(blog);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+});
+
+
+//comments
+app.get("/api/comments", async (req, res) => {
+  try {
+    const comments = await Comment.find();
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.post("/api/comments", async (req, res) => {
+  try {
+    const { comments, sentiment, author, authorImage } = req.body;
+    // validate the fields
+   
+    const comment = await Comment.create(
+      {
+        text: comments  ,
+        sentiment: sentiment,
+        author : author,
+        authorImage : authorImage
+       } );
+    res.status(201).json(comment);
+  } catch (error) {
+    res.status(500).send("Something weasdfnt wrong");
+  }
+}
+);
 
 module.exports = app;
