@@ -1,103 +1,112 @@
-import React from "react";
-import FontSizeChanger from "react-font-size-changer";
-import { useState, useEffect } from "react";
-import TextToSpeech from "./TextToSpeech";
-import datas from "../assets/blogs.json";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import data from "../assets/blogs.json";
+import { useNavigate } from "react-router-dom";
+import avatar from "../assets/user-dummy.jpeg";
+import Navbar from "./Navbar";
+import { getBlogs } from "../utils/backend";
 
 function Blogs() {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
+
   useEffect(() => {
-    console.log(location);
+    async function fetchBlogs() {
+      // const res = await getBlogs();
+      // console.log(res);
+      // setBlogs(res);
+      // console.log(blogs);
+      setBlogs(data);
+    }
+    fetchBlogs();
   }, []);
-  const [fontSize, setFontSize] = useState(16);
 
-  const increaseFontSize = () => {
-    setFontSize(fontSize + 2);
-  };
-
-  const decreaseFontSize = () => {
-    setFontSize(fontSize - 2);
-  };
-
-  const [ourText, setOurText] = useState("");
-  const msg = new SpeechSynthesisUtterance();
-  msg.rate = 0.8;
-
-  const speechHandler = (msg) => {
-    msg.text = ourText;
-    window.speechSynthesis.speak(msg);
-  };
   return (
     <div>
-      <article className="max-w-5xl px-4 py-24 mx-auto space-y-12">
-        <div className="w-full mx-auto space-y-4 text-center">
-          {location.state.genre.map((genre_name) => (
-            <button className="relative z-10 rounded-full bg-gray-300 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-300">
-              {genre_name}
-            </button>
-          ))}
-          <h1 className="text-4xl font-bold leading-tight md:text-5xl">
-            {location.state.title}
-          </h1>
-          <p className="text-sm text-black">
-            by &nbsp;
-            <span itemprop="name">{location.state.author}</span>
-            &nbsp;on&nbsp;
-            <time datetime="2021-02-12 15:34:18-0200">
-              {location.state.date}
-            </time>
-          </p>
-        </div>
-        <div className="text-center">
-          <button
-            type="button"
-            className="text-white bg-gray-800 focus:ring-1 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-            onClick={increaseFontSize}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M5.12 14L7.5 7.67L9.87 14M6.5 5L1 19h2.25l1.12-3h6.25l1.13 3H14L8.5 5h-2M18 7l-5 5.07l1.41 1.43L17 10.9V17h2v-6.1l2.59 2.6L23 12.07L18 7Z"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="text-white bg-gray-800 focus:ring-1 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-            onClick={decreaseFontSize}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M5.12 14L7.5 7.67L9.87 14M6.5 5L1 19h2.25l1.12-3h6.25l1.13 3H14L8.5 5h-2M18 17l5-5.07l-1.41-1.43L19 13.1V7h-2v6.1l-2.59-2.6L13 11.93L18 17Z"
-              />
-            </svg>
-          </button>
-          <TextToSpeech text={location.state.text} />
-        </div>
+      <Navbar />
 
-        <div className="text-black">
-          <p
-            className="text-justify"
-            value="msg"
-            id="blog-content"
-            style={{ fontSize: `${fontSize}px` }}
-          >
-            {location.state.blog_content}
-          </p>
+      <div className="bg-white py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <div className="mx-auto max-w-2xl lg:mx-0">
+              <a
+                className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                aria-label="This is blog page"
+              >
+                Audible Blogs
+              </a>
+              <p className="mt-2 text-lg leading-8 text-gray-600">
+                Don't only read the blogs, now listen them too!
+              </p>
+            </div>
+            <div>
+              <button
+                onClick={() => {
+                  navigate("/createBlog");
+                }}
+                className="bg-gray-900 text-white px-5 py-2 rounded-lg flex items-center hover:bg-black"
+              >
+                Create
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20"
+                  viewBox="0 -960 960 960"
+                  width="20"
+                  className="fill-white ml-3"
+                >
+                  <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            {blogs.map((blog) => (
+              <article
+                aria-label={`${blog.title} by ${blog.author}`}
+                onClick={() => {
+                  navigate("/blog", { state: blog });
+                }}
+                className="flex max-w-xl flex-col items-start justify-between"
+              >
+                <div className="flex items-center gap-x-4 text-xs">
+                  <time datetime="2020-03-16" className="text-gray-500">
+                    {new Date(blog.timestamp).toDateString().slice(4)}
+                  </time>
+                  {blog.tags.map((genre) => (
+                    <a className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">
+                      {genre}
+                    </a>
+                  ))}
+                </div>
+                <div className="group relative">
+                  <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                    <span className="absolute inset-0"></span>
+                    {blog.title}
+                  </h3>
+                  <p className="mt-5 text-sm leading-6 text-gray-600 line-clamp-3">
+                    {blog.text}
+                  </p>
+                </div>
+                <div className="relative mt-8 flex items-center gap-x-4">
+                  <img
+                    src={avatar}
+                    alt="profile-image"
+                    className="h-10 w-10 rounded-full bg-gray-50"
+                  />
+                  <div className="text-sm leading-6">
+                    <p className="font-semibold text-gray-900">
+                      <a href="#">
+                        <span className="absolute inset-0"></span>
+                        {"Sainath Poojary"}
+                      </a>
+                    </p>
+                    <p className="text-gray-600">{"Author"}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-      </article>
+      </div>
     </div>
   );
 }

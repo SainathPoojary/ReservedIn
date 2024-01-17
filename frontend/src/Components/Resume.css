@@ -27,12 +27,3 @@ main {
   width: 100%;
   height: calc(100% - 62px - 49px);
 }
-input {
-  border-radius: 2px !important;
-  border-color: gray;
-  border-color: rgb(17, 0, 100) !important;
-}
-input:focus {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px !important;
-}

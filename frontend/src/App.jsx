@@ -5,12 +5,12 @@ import Course from "./Components/Course";
 import JobPortal from "./Components/JobPortal";
 
 import Schemes from "./Components/Schemes";
-import Blogs from "./Components/Blogs";
+import Blog from "./Components/Blog";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Register from "./Components/Register";
-import BlogPages from "./Components/BlogPage";
+import Blogs from "./Components/Blogs";
 import GrievanceSys from "./Components/GrievanceSys";
 import CoursePage from "./Components/CoursePage";
 import Navbar from "./Components/Navbar";
@@ -19,6 +19,7 @@ import ResumeMakers from "./Components/ResumeMakers";
 import TTS from "./Components/TTS";
 import UserInput from "./Components/UserInput";
 import AboutUs from "./Components/AboutUs";
+import CreateBlog from "./screens/CreateBlog";
 
 function App() {
   return (
@@ -31,8 +32,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/schemes" element={<Schemes />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blogpage" element={<BlogPages />} />
           <Route path="/grievance" element={<GrievanceSys />} />
           <Route path="/coursepage" element={<CoursePage />} />
           <Route path="/course" element={<Course />} />
@@ -41,6 +42,7 @@ function App() {
           <Route path="/tts" element={<TTS />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/test" element={<UserInput />} />
+          <Route path="/createBlog" element={<CreateBlog />} />
         </Routes>
       </BrowserRouter>
     </div>

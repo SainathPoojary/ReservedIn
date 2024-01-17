@@ -29,19 +29,19 @@ function Navbar() {
               <clipPath id="bcb773a0ad">
                 <path
                   d="M 187.5 0 C 83.945312 0 0 83.945312 0 187.5 C 0 291.054688 83.945312 375 187.5 375 C 291.054688 375 375 291.054688 375 187.5 C 375 83.945312 291.054688 0 187.5 0 "
-                  clip-rule="nonzero"
+                  clipRule="nonzero"
                 />
               </clipPath>
               <clipPath id="4d8604e52b">
                 <path
                   d="M 122 55.449219 L 168 55.449219 L 168 101 L 122 101 Z M 122 55.449219 "
-                  clip-rule="nonzero"
+                  clipRule="nonzero"
                 />
               </clipPath>
               <clipPath id="75f65c7ec2">
                 <path
                   d="M 69.148438 165 L 233 165 L 233 319.449219 L 69.148438 319.449219 Z M 69.148438 165 "
-                  clip-rule="nonzero"
+                  clipRule="nonzero"
                 />
               </clipPath>
             </defs>
@@ -114,7 +114,7 @@ function Navbar() {
           <button
             className="mr-5"
             aria-label="This is blogpage"
-            onClick={() => navigate("/blogpage")}
+            onClick={() => navigate("/blogs")}
           >
             Blogs
           </button>
@@ -166,9 +166,9 @@ function Navbar() {
           <svg
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             className="w-4 h-4 ml-1"
             viewBox="0 0 24 24"
           >
