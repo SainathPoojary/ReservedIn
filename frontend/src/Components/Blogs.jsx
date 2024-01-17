@@ -83,7 +83,7 @@ function Blogs() {
                     {blog.title}
                   </h3>
                   <p className="mt-5 text-sm leading-6 text-gray-600 line-clamp-3">
-                    {blog.text}
+                    {blog.text.slice(0, 300)}...
                   </p>
                 </div>
                 <div className="relative mt-8 flex items-center gap-x-4">

@@ -47,8 +47,8 @@ function Blog() {
   return (
     <div>
       <article className="max-w-5xl px-4 py-24 mx-auto space-y-12">
-        <div className="w-full mx-auto space-y-4 text-center">
-          {location.state.genre.map((genre_name) => (
+        <div className="w-full mx-auto space-y-4 space-x-2 text-center">
+          {location.state.tags.map((genre_name) => (
             <button className="relative z-10 rounded-full bg-gray-300 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-300">
               {genre_name}
             </button>
