@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require("next-pwa")({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-});
-module.exports = withPWA({
+
+module.exports = {
   experimental: {
     appDir: true,
   },
@@ -14,4 +10,4 @@ module.exports = withPWA({
   eslint: {
     ignoreDuringBuilds: true,
   },
-});
+};
