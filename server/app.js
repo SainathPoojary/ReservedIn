@@ -1,5 +1,7 @@
 require("dotenv").config();
 require("./config/database").connect();
+const { ObjectId } = require('mongodb');
+
 const cors = require('cors');
 
 
@@ -37,13 +39,6 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is up and running.\n");
 });
 
-app.post("/api/blog", async (req, res) => {
-  res.send("Hello World PoSt")
-
-});
-app.get("/api/blog", async (req, res) => {
-    res.send("Hello World")
-});
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password, contact, disabilityType, disabilityPercentage, disabilityProof,skills,videoId , pin} = req.body;
@@ -143,7 +138,7 @@ app.post("/login", async (req, res) => {
   res.status(400).send("Invalid Credentials");
 });
 
-app.get("/video/getId/:id", async (req, res) => {
+app.get("/user/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
@@ -199,23 +194,13 @@ app.get("/api/blogs", async (req, res) => {
 }
 );
 
-app.get("/api/blogs/:id", async (req, res) => {
-  try {
-    const blog = await Blog.findById(req.params.id);
-    res.status(200).json(blog);
-  } catch (error) {
-    res.status(500).send("Something went wrong");
-  }
-}
-);
-
 app.post("/api/blogs", async (req, res) => {
   try {
-    const { authors, index, tags, text, timestamp, title, url, authorImage, authorId, user, comments } = req.body;
-    // console.log(a);
+    const {  authors, tags, text, timestamp, title, url, authorImage, authorId } = req.body;
+
+    // Create a new blog document
     const blog = await Blog.create({
       authors: authors,
-      index: index,
       tags: tags,
       text: text,
       timestamp: timestamp,
@@ -223,18 +208,20 @@ app.post("/api/blogs", async (req, res) => {
       url: url,
       authorImage: authorImage,
       authorId: authorId,
-      user: user,
-      comments: comments
+
     });
+
+    // Respond with the created blog
     res.status(201).json(blog);
+
   } catch (error) {
+    console.error(error);
     res.status(500).send("Something went wrong");
   }
 });
 
-
 //comments
-app.get("/api/comments", async (req, res) => {
+app.get("/comments", async (req, res) => {
   try {
     const comments = await Comment.find();
     res.status(200).json(comments);
@@ -244,9 +231,9 @@ app.get("/api/comments", async (req, res) => {
 }
 );
 
-app.post("/api/comments", async (req, res) => {
+app.post("/comments", async (req, res) => {
   try {
-    const { comments, sentiment, author, authorImage } = req.body;
+    const { comments, sentiment, author, authorImage, blogId } = req.body;
     // validate the fields
    
     const comment = await Comment.create(
@@ -255,12 +242,132 @@ app.post("/api/comments", async (req, res) => {
         sentiment: sentiment,
         author : author,
         authorImage : authorImage
-       } );
+       } ).catch((err) => {
+        console.log(err);
+      });
+       const blog = await Blog.findById(blogId);
+  
+      blog.comments.push("65a8e7f6cc2e473fee2fb64c");
     res.status(201).json(comment);
   } catch (error) {
-    res.status(500).send("Something weasdfnt wrong");
+    res.status(500).send("Something went wrong");
   }
 }
 );
+
+
+// Resume
+const Resume = require("./model/resume");
+app.get("/resume/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    const resume = await Resume.find( { userId: id })
+    if (!resume) {
+      console.log(resume);
+      return res.status(404).send("User not found");}
+    
+    resume.password = undefined;
+    res.status(200).json(resume);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.post("/resume", async (req, res) => {
+  const { name, contact, qualifications, hobbies, achievements, interestedIn, disabilityType, email, userId } = req.body;
+  try {
+    const resume = await Resume.create({
+      name: name,
+      contact: contact,
+      qualifications: qualifications,
+      hobbies: hobbies,
+      achievements: achievements,
+      interestedIn: interestedIn,
+      disabilityType: disabilityType,
+      email: email,
+      userId: userId
+    });
+    res.status(201).json(resume);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+});
+
+
+//Jobs
+const Jobs = require("./model/jobs");
+app.get("/jobs", async (req, res) => {
+  try {
+    const jobs = await Jobs.find();
+    res.status(200).json(jobs);
+  }
+  catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.get("/jobs/user/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    const user = await User.findById(id);
+    const skills = user.skills;
+    const jobs = await Jobs.find({ tags: { $in: skills } });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.post("/jobs", async (req, res) => {
+  try {
+    const { company, position, location, date, tags, desc, applicants } = req.body;
+    // validate the fields
+    // if (!(company && position && location && date && description && tags && desc && applicants)) {
+    //   res.status(400).send("All input is required");
+    // }
+
+    console.log(req.body);
+
+    const job = await Jobs.create({
+      company: company,
+      position: position,
+      location: location,
+      date: date,
+      tags: tags,
+      desc: desc
+    });
+
+    res.status(201).json(job);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+}
+);
+
+app.post("/jobs/apply", async (req, res) => {
+  try {
+    const { jobId, userId } = req.body;
+    // validate the fields
+    // if (!(company && position && location && date && description && tags && desc && applicants)) {
+    //   res.status(400).send("All input is required");
+    // }
+
+    console.log(req.body);
+
+    const job = await Jobs.findById(jobId);
+    job.applicants.push(userId);
+    await job.save();
+    
+
+    res.status(201).json(job);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+});
 
 module.exports = app;

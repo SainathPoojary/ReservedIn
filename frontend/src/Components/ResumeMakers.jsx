@@ -170,10 +170,8 @@ function ResumeMaker() {
       windowWidth: 100,
       windowHeight: 100,
 
-      html2canvas: {
-        scale: 0.37,
-      },
-      
+   
+
 
 
     });
