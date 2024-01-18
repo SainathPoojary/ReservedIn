@@ -4,7 +4,7 @@ axios.defaults.baseURL = "http://localhost:4000";
 
 const getBlogs = async () => {
   try {
-    const response = await axios.get("/blogs");
+    const response = await axios.get("/api/blogs");
     return response.data;
   } catch (error) {
     console.log(error);
