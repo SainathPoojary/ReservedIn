@@ -71,6 +71,7 @@ function Register() {
 
   function register(e) {
     e.preventDefault();
+    // const daat
     for (const key in getRegistartionFormInputs) {
       localStorage.setItem(key, getRegistartionFormInputs[key]);
     }

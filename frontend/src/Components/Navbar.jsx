@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 import TTS from "./TTS";
-import './bgcolor.css';
+import "./bgcolor.css";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -108,9 +108,9 @@ function Navbar() {
           <button
             className="mr-5" // Added mb-2 for bottom margin
             aria-label="Click here to go to Job portal"
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/jobs")}
           >
-            Job Portal
+            Jobs
           </button>
           <br />
           <button
@@ -118,7 +118,7 @@ function Navbar() {
             aria-label="Click here to go to resume maker"
             onClick={() => navigate("/resume")}
           >
-            Resume Maker
+            Resume Builder
           </button>
           <br />
           <button
@@ -134,7 +134,7 @@ function Navbar() {
             aria-label="This is for courses"
             onClick={() => navigate("/coursepage")}
           >
-            Courses
+            Resourses
           </button>
           <br />
           <button
@@ -150,16 +150,24 @@ function Navbar() {
             aria-label="This is mentorship page"
             onClick={() => navigate("/grievance")}
           >
-            Grievance System
+            Grievance
           </button>
           <button
             className="mr-5"
             aria-label="This is about page"
             onClick={() => navigate("/about")}
           >
-            Know About Us and Your Rights
+            About Us
           </button>
-          
+          <button
+            onClick={() =>
+              (window.location.href =
+                "https://www.colorlitelens.com/color-blindness-test.html#Redgreen")
+            }
+            className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
+          >
+            Check Color Blindness
+          </button>
 
           <select data-choose-theme>
             <option value="">Default</option>
@@ -167,10 +175,8 @@ function Navbar() {
             <option value="dark">protanopia</option>
             <option value="pink">deuteranopia</option>
             <option value="blue">tritanopia</option>
-            
-</select>
+          </select>
           <br />
-          
 
           {/* <a className="mr-5 hover:text-gray-900">Second Link</a> */}
           {/* <a className="mr-5 hover:text-gray-900">Third Link</a> */}

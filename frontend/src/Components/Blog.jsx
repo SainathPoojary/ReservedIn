@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import TextToSpeech from "./TextToSpeech";
 import { useLocation } from "react-router-dom";
+import { createComment } from "../utils/backend";
 
 function Blog() {
   const location = useLocation();
@@ -20,8 +21,16 @@ function Blog() {
   ]);
 
   const [comment, setComment] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // add comment to db
+    const res = await createComment(
+      comment,
+      localStorage.getItem("name") || "John Doe",
+      location.state._id
+    );
+
     setComments([
       ...comments,
       {
@@ -58,10 +67,10 @@ function Blog() {
           </h1>
           <p className="text-sm text-black">
             by &nbsp;
-            <span itemprop="name">{location.state.author}</span>
+            <span itemprop="name">{location.state.authors}</span>
             &nbsp;on&nbsp;
             <time datetime="2021-02-12 15:34:18-0200">
-              {location.state.date}
+              {new Date(location.state.timestamp).toDateString().slice(4)}{" "}
             </time>
           </p>
         </div>
@@ -110,7 +119,7 @@ function Blog() {
             id="blog-content"
             style={{ fontSize: `${fontSize}px` }}
           >
-            {location.state.blog_content}
+            {location.state.text}
           </p>
         </div>
       </article>

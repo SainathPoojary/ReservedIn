@@ -11,11 +11,11 @@ function Blogs() {
 
   useEffect(() => {
     async function fetchBlogs() {
-      // const res = await getBlogs();
-      // console.log(res);
-      // setBlogs(res);
-      // console.log(blogs);
-      setBlogs(data);
+      const res = await getBlogs();
+      console.log(res);
+      setBlogs(res);
+      console.log(blogs);
+      // setBlogs(data);
     }
     fetchBlogs();
   }, []);
@@ -96,7 +96,7 @@ function Blogs() {
                     <p className="font-semibold text-gray-900">
                       <a href="#">
                         <span className="absolute inset-0"></span>
-                        {"Sainath Poojary"}
+                        {blog.authors}
                       </a>
                     </p>
                     <p className="text-gray-600">{"Author"}</p>

@@ -21,7 +21,8 @@ export default function CreateBlog() {
       localStorage.getItem("name")
     );
 
-    if (res.status === 200) {
+    if (res.status === 201) {
+      console.log("Blog created");
       navigate("/blogs");
     }
   };
@@ -96,26 +97,6 @@ export default function CreateBlog() {
               className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 "
             >
               Add Blog
-            </button>
-            <button
-              onClick={() => {
-                fetch("https://rubix24-code-rizzz-tmup.vercel.app/api/blog")
-                  .then((res) => res.json())
-                  .then((data) => console.log(data));
-              }}
-            >
-              ftech
-            </button>
-
-            <button
-              onClick={() => {
-                fetch("https://rubix24-code-rizzz-tmup.vercel.app/api/blog", {
-                  method: "POST",
-                  body: {},
-                }).then((res) => console.log(res));
-              }}
-            >
-              Post
             </button>
           </form>
         </div>
