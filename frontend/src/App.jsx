@@ -22,6 +22,7 @@ import AboutUs from "./Components/AboutUs";
 import CreateBlog from "./screens/CreateBlog";
 import Jobs from "./Components/Jobs";
 
+
 function App() {
   return (
     <div>
@@ -45,6 +46,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/test" element={<UserInput />} />
           <Route path="/createBlog" element={<CreateBlog />} />
+       
         </Routes>
       </BrowserRouter>
     </div>
