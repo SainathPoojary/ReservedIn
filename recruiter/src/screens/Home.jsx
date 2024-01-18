@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getJobs } from "../utils/backend";
 import { useNavigate } from "react-router";
-import ColorBlindnessFilter from "./ColorBlindnessFilter";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);

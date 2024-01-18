@@ -46,7 +46,6 @@ export default function CreateBlog() {
                 <input
                   type="text"
                   name="name"
-                  id="name"
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-blue-600 block w-full p-2.5"

@@ -40,6 +40,14 @@ export default function Jobs() {
     // alert("Applied Successfully");
   };
 
+  const hasApplied = (applicants) => {
+    const userId = localStorage.getItem("userId");
+    if (applicants.includes(userId)) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div>
       <Navbar />
@@ -90,6 +98,13 @@ export default function Jobs() {
                       <span className="mr-1">{tag}</span>
                     </span>
                   ))}
+                </div>
+                <div className>
+                  {hasApplied(job.applicants) && (
+                    <span className="mr-1 rounded-full bg-blue-100 px-2 py-0.5 text-blue-900">
+                      <span className="mr-1">Applied</span>
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -150,7 +165,14 @@ export default function Jobs() {
                 <div className="mt-3">
                   <button
                     onClick={() => {
+                      if (hasApplied(curJob.applicants)) {
+                        toast.error("Already Applied");
+                        return;
+                      }
+
                       handleApply(curJobId);
+                      curJob.applicants.push(localStorage.getItem("userId"));
+
                       setModal(false);
                     }}
                     aria-label="Apply Button for Job"
