@@ -28,7 +28,11 @@ const userSchema = new mongoose.Schema({
     default: null,
   },
   disabilityProof: {
-    type: String,
+    type: {
+      name: String,
+      year: String,
+      status: String,
+    },
     default: null,
   },
   skills: {
@@ -39,11 +43,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  pin:{
+  pin: {
     type: String,
     default: null,
-  }
-
+  },
 });
 
 const User = mongoose.model("user", userSchema);

@@ -1,39 +1,37 @@
 require("dotenv").config();
 require("./config/database").connect();
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
 
-const cors = require('cors');
-
+const cors = require("cors");
 
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const swaggerUi = require('swagger-ui-express');
-const fs = require("fs")
-const YAML = require('yaml')
+const swaggerUi = require("swagger-ui-express");
+const fs = require("fs");
+const YAML = require("yaml");
 
 const User = require("./model/user");
 const auth = require("./middleware/auth");
 
-const file = fs.readFileSync(__dirname + '/swagger.yaml', 'utf8')
-const swaggerDocument = YAML.parse(file)
+const file = fs.readFileSync(__dirname + "/swagger.yaml", "utf8");
+const swaggerDocument = YAML.parse(file);
 
 const app = express();
 
 app.use(cors());
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {
   res.status(200).send("Server is up and running.\n");
@@ -41,26 +39,39 @@ app.get("/", (req, res) => {
 
 app.post("/register", async (req, res) => {
   try {
-    const { name, email, password, contact, disabilityType, disabilityPercentage, disabilityProof,skills,videoId , pin} = req.body;
+    const {
+      name,
+      email,
+      password,
+      contact,
+      disabilityType,
+      disabilityPercentage,
+      disabilityProof,
+      skills,
+      videoId,
+      pin,
+    } = req.body;
+
+    console.log(req.body);
+
     // validate the fields
-    if (!(email && password && name)) {
+    if (!(email && name)) {
       res.status(400).send("All input is required");
+      return;
     }
 
     // check if user already exist
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ videoId });
 
     if (existingUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      res.status(409).send("Data already exists");
+      return;
     }
-
-    // hash user password
-    const encryptedPassword = await bcrypt.hash(password, 10);
 
     // create user in our database
     const user = await User.create({
-      name : name,
-      password: encryptedPassword,
+      name: name,
+      password,
       email: email.toLowerCase().trim(),
       contact: contact,
       disabilityType: disabilityType,
@@ -68,38 +79,18 @@ app.post("/register", async (req, res) => {
       disabilityProof: disabilityProof,
       skills: skills,
       videoId: videoId,
-      pin: pin
+      pin: pin,
     });
 
-    // create token
-    const token = jwt.sign(
-      {
-        userId: user._id,
-        email,
-      },
-      process.env.SECRET_KEY,
-      {
-        expiresIn: "2h",
-      }
-    );
-
-    // save user token
-    user.token = token;
-
-    // remove user password from response
-    user.password = undefined;
-
-
-    const option = {
-      expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-    };
-
-    res.status(201).cookie("token", token, option).json(user);
+    res.status(201).json(user);
   } catch (err) {
     console.log(err);
     res.status(500).send("Something went wrong");
   }
+});
+
+User.find({}).then((users) => {
+  console.log(users);
 });
 
 app.post("/login", async (req, res) => {
@@ -142,16 +133,15 @@ app.get("/user/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
-    const user =  await User.findOne({ videoId: id });
+    const user = await User.findOne({ videoId: id });
     if (!user) return res.status(404).send("User not found");
     user.password = undefined;
-    
+
     res.status(200).json(user);
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.get("/dashboard", auth, async (req, res) => {
   const { email } = req.user;
@@ -176,10 +166,6 @@ app.get("/logout", (req, res) => {
   }
 });
 
-
-
-
-
 //blogs
 const Blog = require("./model/blogs");
 const Comment = require("./model/comments");
@@ -191,12 +177,20 @@ app.get("/api/blogs", async (req, res) => {
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.post("/api/blogs", async (req, res) => {
   try {
-    const {  authors, tags, text, timestamp, title, url, authorImage, authorId } = req.body;
+    const {
+      authors,
+      tags,
+      text,
+      timestamp,
+      title,
+      url,
+      authorImage,
+      authorId,
+    } = req.body;
 
     // Create a new blog document
     const blog = await Blog.create({
@@ -208,12 +202,10 @@ app.post("/api/blogs", async (req, res) => {
       url: url,
       authorImage: authorImage,
       authorId: authorId,
-
     });
 
     // Respond with the created blog
     res.status(201).json(blog);
-
   } catch (error) {
     console.error(error);
     res.status(500).send("Something went wrong");
@@ -228,34 +220,30 @@ app.get("/comments", async (req, res) => {
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.post("/comments", async (req, res) => {
   try {
     const { comments, sentiment, author, authorImage, blogId } = req.body;
     // validate the fields
-   
-    const comment = await Comment.create(
-      {
-        text: comments  ,
-        sentiment: sentiment,
-        author : author,
-        authorImage : authorImage
-       } ).catch((err) => {
-        console.log(err);
-      });
-       const blog = await Blog.findById(blogId);
-       const commentId = comment._id;
-      blog.comments.push(commentId);
-      await blog.save();
+
+    const comment = await Comment.create({
+      text: comments,
+      sentiment: sentiment,
+      author: author,
+      authorImage: authorImage,
+    }).catch((err) => {
+      console.log(err);
+    });
+    const blog = await Blog.findById(blogId);
+    const commentId = comment._id;
+    blog.comments.push(commentId);
+    await blog.save();
     res.status(201).json(comment);
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
-
+});
 
 // Resume
 const Resume = require("./model/resume");
@@ -263,21 +251,31 @@ app.get("/resume/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
-    const resume = await Resume.find( { userId: id })
+    const resume = await Resume.find({ userId: id });
     if (!resume) {
       console.log(resume);
-      return res.status(404).send("User not found");}
-    
+      return res.status(404).send("User not found");
+    }
+
     resume.password = undefined;
     res.status(200).json(resume);
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.post("/resume", async (req, res) => {
-  const { name, contact, qualifications, hobbies, achievements, interestedIn, disabilityType, email, userId } = req.body;
+  const {
+    name,
+    contact,
+    qualifications,
+    hobbies,
+    achievements,
+    interestedIn,
+    disabilityType,
+    email,
+    userId,
+  } = req.body;
   try {
     const resume = await Resume.create({
       name: name,
@@ -288,7 +286,7 @@ app.post("/resume", async (req, res) => {
       interestedIn: interestedIn,
       disabilityType: disabilityType,
       email: email,
-      userId: userId
+      userId: userId,
     });
     res.status(201).json(resume);
   } catch (error) {
@@ -296,19 +294,16 @@ app.post("/resume", async (req, res) => {
   }
 });
 
-
 //Jobs
 const Jobs = require("./model/jobs");
 app.get("/jobs", async (req, res) => {
   try {
     const jobs = await Jobs.find();
     res.status(200).json(jobs);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.get("/jobs/user/:id", async (req, res) => {
   const { id } = req.params;
@@ -321,12 +316,12 @@ app.get("/jobs/user/:id", async (req, res) => {
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.post("/jobs", async (req, res) => {
   try {
-    const { company, position, location, date, tags, desc, applicants } = req.body;
+    const { company, position, location, date, tags, desc, applicants } =
+      req.body;
     // validate the fields
     // if (!(company && position && location && date && description && tags && desc && applicants)) {
     //   res.status(400).send("All input is required");
@@ -340,15 +335,14 @@ app.post("/jobs", async (req, res) => {
       location: location,
       date: date,
       tags: tags,
-      desc: desc
+      desc: desc,
     });
 
     res.status(201).json(job);
   } catch (error) {
     res.status(500).send("Something went wrong");
   }
-}
-);
+});
 
 app.post("/jobs/apply", async (req, res) => {
   try {
@@ -363,7 +357,6 @@ app.post("/jobs/apply", async (req, res) => {
     const job = await Jobs.findById(jobId);
     job.applicants.push(userId);
     await job.save();
-    
 
     res.status(201).json(job);
   } catch (error) {

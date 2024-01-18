@@ -1,183 +1,210 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "../firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { registerUser, validateCertificate } from "../utils/backend";
+
 function Register() {
   const navigate = useNavigate();
 
-  const [getRegistartionFormInputs, setRegistrationFormInputs] = useState({
-    name: "",
-    contact: "",
-    disability: "Visual",
-    disabilityPercentage: 50,
-    skills: [],
-  });
-  const [getSliderVal, setSliderval] = useState(50);
-  const [unsubscriber, setUnsubscriber] = useState(() => {
-    console.log("default unsub called");
-  });
-  const onSilderChange = (event) => {
-    setSliderval(event.target.value);
-  };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [disabilityType, setDisabilityType] = useState("");
+  const [disabilityPercentage, setDisabilityPercentage] = useState("");
+  const [skill, setSkill] = useState([]);
+  const [disabilityCertificate, setDisabilityCertificate] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const getInputs = (event) => {
-    if (
-      event.target.name === "disability" ||
-      event.target.name === "disabilityPercentage" ||
-      event.target.name === "skill"
-    ) {
-      const getRegistartionFormInputsCopy = { ...getRegistartionFormInputs };
-      if (event.target.name === "disability")
-        getRegistartionFormInputsCopy.disability = event.target.value;
-      else if (event.target.name === "disabilityPercentage")
-        getRegistartionFormInputsCopy.disabilityPercentage = getSliderVal;
-      else {
-        event.target.checked
-          ? getRegistartionFormInputsCopy.skills.push(event.target.value)
-          : (getRegistartionFormInputsCopy.skills =
-              getRegistartionFormInputsCopy.skills.filter(
-                (skill) => skill !== event.target.value
-              ));
-      }
-      setRegistrationFormInputs(getRegistartionFormInputsCopy);
-    } else
-      setRegistrationFormInputs(() => ({
-        ...getRegistartionFormInputs,
-        [event.target.name]: event.target.value,
-      }));
-  };
-
-  const registerUser = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Called");
-    console.log(getRegistartionFormInputs);
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setDoc(doc(db, "users", user.uid), {
-        ...getRegistartionFormInputs,
-        registerCompleted: true,
-      })
-        .then(() => {
-          console.log("Data uploaded", user);
-          navigate("/");
-        })
-        .catch((err) => console.log(err));
-    });
+    setLoading(true);
+    // console.log(name, email, contact, disabilityType, disabilityPercentage);
+    // console.log(skill);
+    // console.log(disabilityCertificate);
 
-    setUnsubscriber(unsub);
-  };
+    // Validate Certificate
+    const disabilityProof = await validateCertificate(disabilityCertificate);
+    // response  structure
+    //{
+    //     "status": "Authorized",
+    //     "name": "Bhushan Sudhakar Pillay",
+    //     "year": "1987"
+    // }
 
-  function register(e) {
-    e.preventDefault();
-    // const daat
-    for (const key in getRegistartionFormInputs) {
-      localStorage.setItem(key, getRegistartionFormInputs[key]);
+    if (disabilityProof.status !== "Authorized") {
+      alert("Invalid Certificate");
+      return;
     }
-    navigate("/home");
-  }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
+    // Send data to backend
+    const data = {
+      name,
+      email,
+      password: "",
+      contact,
+      disabilityType,
+      disabilityPercentage,
+      disabilityProof,
+      skills: skill,
+      videoId: localStorage.getItem("userId") || "",
+      pin: "1234",
+    };
 
-      if (user) {
-        console.log(user.uid);
-        getDoc(doc(db, "users", user.uid)).then((data) => {
-          console.log(data.data());
-          if (data.data()["registerCompleted"]) {
-            navigate("/");
-          } else {
-            navigate("/register");
-          }
-        });
+    // set data to localstorage
+    for (let key in data) {
+      localStorage.setItem(
+        key,
+        typeof data[key] === "object" ? JSON.stringify(data[key]) : data[key]
+      );
+    }
+
+    const res = await registerUser(data);
+
+    setLoading(false);
+
+    if (res.status === 201 || res === 409) {
+      navigate("/home");
+    } else {
+      alert("Something went wrong");
+    }
+  };
+
+  const handleSkill = (e) => {
+    const { value } = e.target;
+    setSkill((prev) => {
+      if (prev.includes(value)) {
+        return prev.filter((skill) => skill !== value);
+      } else {
+        return [...prev, value];
       }
     });
-
-    return () => {
-      unsubscribe();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <button className="flex items-center mb-6 text-2xl font-bold text-black">
-        BeyondLimitation.
-      </button>
       <div className="w-full bg-blue-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
-            Register Here for free!
+          <h1
+            aria-label="Register Here for free!"
+            className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl "
+          >
+            Registrations
           </h1>
-          <form className="space-y-4 md:space-y-6" onSubmit={register}>
+          <form className="space-y-4 md:space-y-4" onSubmit={handleSubmit}>
             <div>
               <label
+                aria-label="Your Name"
                 htmlFor="name"
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Your Name:
               </label>
               <input
+                aria-label="Your Name"
                 type="string"
                 name="name"
-                id="name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Your name"
                 required=""
-                onChange={getInputs}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
               />
             </div>
             <div>
               <label
-                htmlFor="password"
+                aria-label="Your Name"
+                htmlFor="name"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Email
+              </label>
+              <input
+                aria-label="Your Email"
+                type="string"
+                name="email"
+                id="email"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                placeholder="Your email"
+                required=""
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="contact"
                 className="block mb-2 text-sm font-medium text-gray-900 "
               >
                 Contact Number:
               </label>
               <input
+                aria-label="Contact Number"
                 type="number"
                 name="contact"
                 id="contact"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 required=""
-                onChange={getInputs}
+                placeholder="Contact Number"
+                onChange={(e) => setContact(e.target.value)}
+                value={contact}
               />
             </div>
 
-            {/*  Add dropdown list */}
-            <div className="relative inline-block text-left">
-              <div className="col-md-6">
-                <label htmlFor="inputState" className="form-label">
-                  Select your disability type
-                </label>
-                <select
-                  id="inputState"
-                  className="form-select"
-                  name="disability"
-                  onChange={getInputs}
-                >
-                  <option value="Visula">Visual</option>
-                  <option value="partial-handicap">Auditory</option>
-                </select>
-              </div>
+            <div>
+              <label
+                htmlFor="disability"
+                className="block mb-2 text-sm font-medium text-gray-900 "
+              >
+                Disability Type:
+              </label>
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                id="inputState"
+                name="disability"
+                onChange={(e) => setDisabilityType(e.target.value)}
+                value={disabilityType}
+              >
+                <option value="Visula">Mobility Disabilities</option>
+                <option value="visually-impaired">Visual Impairments</option>
+                <option value="color-blind">Color Blindness</option>
+                <option value="auditory-impaired">Hearing Impairments</option>
+                <option value="cognitive-disabilities">
+                  Cognitive Disabilities
+                </option>
+                <option value="psychiatric-disabilities">
+                  Psychiatric Disabilities
+                </option>
+              </select>
             </div>
 
             <div className="col-md-3">
-              <label htmlFor="customRange1" className="form-label">
-                Disability Percentage {`${getSliderVal}%`}
+              <label htmlFor="disabilityPercentage" className="form-label">
+                Disability Percentage:
               </label>
               <input
-                type="range"
-                className="form-range"
-                id="customRange1"
-                value={getSliderVal}
+                type="number"
+                name="disabilityPercentage"
+                aria-label="Disability Percentage"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                placeholder="Disability Percentage"
                 min={0}
                 max={100}
-                onChange={onSilderChange}
+                onChange={(e) => setDisabilityPercentage(e.target.value)}
+                value={disabilityPercentage}
               />
-              <label htmlFor="inputState" className="form-label"></label>
+            </div>
+
+            <div className="col-md-3">
+              <label htmlFor="disabilityPercentage" className="form-label">
+                Disability Certificate:
+              </label>
+              <input
+                type="file"
+                name="disabilityCertificate"
+                aria-label="Upload Disability Certificate"
+                onChange={(e) => setDisabilityCertificate(e.target.files[0])}
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+              />
             </div>
 
             <div className="flex items-center mb-4">
@@ -186,8 +213,9 @@ function Register() {
                 id="default-checkbox"
                 type="checkbox"
                 value="technical"
-                onChange={getInputs}
+                aria-label="technical"
                 name="skill"
+                onChange={handleSkill}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -201,8 +229,8 @@ function Register() {
                 id="default-checkbox"
                 type="checkbox"
                 value="cooking"
-                onChange={getInputs}
                 name="skill"
+                onChange={handleSkill}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -216,8 +244,8 @@ function Register() {
                 id="default-checkbox"
                 type="checkbox"
                 value="teaching"
-                onChange={getInputs}
                 name="skill"
+                onChange={handleSkill}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
               <label
@@ -230,19 +258,13 @@ function Register() {
 
             <button
               type="submit"
-              className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              Create an account
+              Continue
             </button>
-            <p className="text-sm font-light text-gray-800">
-              Already have an account?{" "}
-              <button onClick={() => navigate("/")}>Login here</button>
-            </p>
           </form>
         </div>
       </div>
-      {/* Remove this after authentication */}
-      <button onClick={() => navigate("/home")}>Home</button>
     </div>
   );
 }

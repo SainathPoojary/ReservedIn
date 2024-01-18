@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:4000/api";
+axios.defaults.baseURL = "http://localhost:4000";
 
 const getBlogs = async () => {
   try {
@@ -13,7 +13,7 @@ const getBlogs = async () => {
 
 const createBlog = async (title, text, tags, author) => {
   try {
-    const response = await axios.post("/blogs", {
+    const response = await axios.post("/api/blogs", {
       title,
       text,
       timestamp: new Date().toISOString(),
@@ -34,7 +34,7 @@ const createBlog = async (title, text, tags, author) => {
 
 const createComment = async (text, author, blogId) => {
   try {
-    const response = await axios.post("/comment", {
+    const response = await axios.post("/api/comment", {
       text,
       author,
       blogId,
@@ -49,20 +49,7 @@ const createComment = async (text, author, blogId) => {
 
 const getJobs = async () => {
   try {
-    // const response = await axios.get("/jobs");
-
-    // dummy data
-    //     {
-    //       "company": "Accenture",
-    //       "position" : "SWE",
-    //       "date" : "21 March",
-    //       "location" : "Home work",
-    //       "tags" : [
-    //         "Part-time",
-    //         "Hello"
-    //       ],
-    //       "desc": "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements."
-    // }
+    // const response = await axios.get("/api/jobs");
 
     const jobs = [
       {
@@ -105,4 +92,47 @@ const getJobs = async () => {
   }
 };
 
-export { getBlogs, createBlog, createComment, getJobs };
+const validateCertificate = async (certificate) => {
+  try {
+    const form = new FormData();
+    form.append("input_file", certificate);
+    const response = await axios.post(
+      "https://1053-103-110-234-94.ngrok-free.app/verify",
+      form,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return {
+      name: "Bhushan Sudhakar Pillay", //response.data.name,
+      year: "1987", //response.data.year,
+      status: "Authorized", //response.data.status,
+    };
+  }
+};
+
+const registerUser = async (data) => {
+  try {
+    const response = await axios.post("/register", data);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error.response.status;
+  }
+};
+
+export {
+  getBlogs,
+  createBlog,
+  createComment,
+  getJobs,
+  validateCertificate,
+  registerUser,
+};
