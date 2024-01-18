@@ -246,8 +246,8 @@ app.post("/comments", async (req, res) => {
         console.log(err);
       });
        const blog = await Blog.findById(blogId);
-  
-      blog.comments.push("65a8e7f6cc2e473fee2fb64c");
+       const commentId = comment._id;
+      blog.comments.push(commentId);
     res.status(201).json(comment);
   } catch (error) {
     res.status(500).send("Something went wrong");
