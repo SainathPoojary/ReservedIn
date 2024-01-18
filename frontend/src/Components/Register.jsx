@@ -18,18 +18,9 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // console.log(name, email, contact, disabilityType, disabilityPercentage);
-    // console.log(skill);
-    // console.log(disabilityCertificate);
 
     // Validate Certificate
     const disabilityProof = await validateCertificate(disabilityCertificate);
-    // response  structure
-    //{
-    //     "status": "Authorized",
-    //     "name": "Bhushan Sudhakar Pillay",
-    //     "year": "1987"
-    // }
 
     if (disabilityProof.status !== "Authorized") {
       alert("Invalid Certificate");
@@ -60,9 +51,13 @@ function Register() {
 
     const res = await registerUser(data);
 
+    console.log(res);
+
+    localStorage.setItem("userId", res._id);
+
     setLoading(false);
 
-    if (res.status === 201 || res === 409) {
+    if (res._id || res === 409) {
       navigate("/home");
     } else {
       alert("Something went wrong");

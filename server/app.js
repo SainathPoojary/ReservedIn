@@ -88,11 +88,6 @@ app.post("/register", async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 });
-
-User.find({}).then((users) => {
-  console.log(users);
-});
-
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -315,6 +310,8 @@ app.get("/jobs", async (req, res) => {
   }
 });
 
+// 2
+
 app.get("/jobs/user/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
@@ -357,10 +354,6 @@ app.post("/jobs", async (req, res) => {
 app.post("/jobs/apply", async (req, res) => {
   try {
     const { jobId, userId } = req.body;
-    // validate the fields
-    // if (!(company && position && location && date && description && tags && desc && applicants)) {
-    //   res.status(400).send("All input is required");
-    // }
 
     console.log(req.body);
 

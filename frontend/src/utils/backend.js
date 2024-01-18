@@ -49,44 +49,48 @@ const createComment = async (text, author, blogId) => {
 
 const getJobs = async () => {
   try {
-    // const response = await axios.get("/api/jobs");
+    const response = await axios.get(
+      `/jobs/user/${localStorage.getItem("userId")}`
+    );
 
-    const jobs = [
-      {
-        company: "Accenture",
-        position: "SWE",
-        date: "21 March",
-        location: "Home work",
-        tags: ["Part-time", "Hello"],
-        desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
-      },
-      {
-        company: "Google",
-        position: "Software Engineer",
-        date: "21 March",
-        location: "USA",
-        tags: ["Full-time", "Hello"],
-        desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
-      },
-      {
-        company: "Accenture",
-        position: "SWE",
-        date: "21 March",
-        location: "Home work",
-        tags: ["Part-time", "Hello"],
-        desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
-      },
-      {
-        company: "Google",
-        position: "Software Engineer",
-        date: "21 March",
-        location: "USA",
-        tags: ["Full-time", "Hello"],
-        desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
-      },
-    ];
+    return response.data;
 
-    return jobs;
+    // const jobs = [
+    //   {
+    //     company: "Accenture",
+    //     position: "SWE",
+    //     date: "21 March",
+    //     location: "Home work",
+    //     tags: ["Part-time", "Hello"],
+    //     desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
+    //   },
+    //   {
+    //     company: "Google",
+    //     position: "Software Engineer",
+    //     date: "21 March",
+    //     location: "USA",
+    //     tags: ["Full-time", "Hello"],
+    //     desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
+    //   },
+    //   {
+    //     company: "Accenture",
+    //     position: "SWE",
+    //     date: "21 March",
+    //     location: "Home work",
+    //     tags: ["Part-time", "Hello"],
+    //     desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
+    //   },
+    //   {
+    //     company: "Google",
+    //     position: "Software Engineer",
+    //     date: "21 March",
+    //     location: "USA",
+    //     tags: ["Full-time", "Hello"],
+    //     desc: "An illustrator creates visual art, designs, and graphics to communicate ideas and messages through various mediums such as books, magazines, websites, and advertisements.",
+    //   },
+    // ];
+
+    // return jobs;
   } catch (error) {
     console.log(error);
   }
@@ -128,6 +132,20 @@ const registerUser = async (data) => {
   }
 };
 
+const applyJob = async (jobId, userId) => {
+  try {
+    console.log(jobId, userId);
+    const response = await axios.post("/jobs/apply", {
+      jobId,
+      userId,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   getBlogs,
   createBlog,
@@ -135,4 +153,5 @@ export {
   getJobs,
   validateCertificate,
   registerUser,
+  applyJob,
 };
