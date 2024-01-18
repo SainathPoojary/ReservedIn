@@ -53,20 +53,20 @@ const TTS = () => {
       callback: () => navigate("/jobportal", { replace: true }),
     },
     {
-      command: "Go to resume maker",
+      command: "Go to resume builder",
       callback: () => navigate("/resume", { replace: true }),
     },
     {
-      command: "open resume maker",
+      command: "open resume builder",
       callback: () => navigate("/resume", { replace: true }),
     },
     {
       command: "Go to blogs",
-      callback: () => navigate("/blogpage", { replace: true }),
+      callback: () => navigate("/blogs", { replace: true }),
     },
     {
       command: "open blogs",
-      callback: () => navigate("/blogpage", { replace: true }),
+      callback: () => navigate("/blogs", { replace: true }),
     },
     {
       command: "Go to courses",
@@ -93,6 +93,14 @@ const TTS = () => {
       callback: () => navigate("/grievance", { replace: true }),
     },
     {
+      command: "grivance",
+      callback: () => navigate("/grievance", { replace: true }),
+    },
+    {
+      command: "open grievance system",
+      callback: () => navigate("/grievance", { replace: true }),
+    },
+    {
       command: "I want to complain",
       callback: () => navigate("/grievance", { replace: true }),
     },
@@ -110,11 +118,11 @@ const TTS = () => {
     },
     {
       command: "I want to read",
-      callback: () => navigate("/blog", { replace: true }),
+      callback: () => navigate("/blogs", { replace: true }),
     },
     {
       command: "Read blogs",
-      callback: () => navigate("/blog", { replace: true }),
+      callback: () => navigate("/blogs", { replace: true }),
     },
     {
       command: "scroll to bottom",
