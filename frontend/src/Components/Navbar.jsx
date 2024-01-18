@@ -5,26 +5,31 @@ import { auth } from "../firebaseConfig";
 import TTS from "./TTS";
 import './bgcolor.css';
 
-
 function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
+  const [colorBlind, setColorBlind] = useState(true); // Set default value to true
+
   useEffect(() => {
     onAuthStateChanged(auth, (userCredential) => {
       setUser(userCredential);
     });
-  });
+  }, []);
+
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <a
+          className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+          onClick={() => {
+            navigate("/home");
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="40"
-            zoomAndPan="magnify"
             viewBox="0 0 375 374.999991"
             height="40"
-            preserveAspectRatio="xMidYMid meet"
             version="1.0"
           >
             <defs>
@@ -86,19 +91,20 @@ function Navbar() {
               />
             </g>
           </svg>
-          <span
-            className="ml-3 text-xl"
-            onClick={() => {
-              navigate("/home");
-            }}
-          >
-            BeyondLimitation
-          </span>
+          <span className="ml-3 text-xl">ReservedIn</span>
         </a>
         <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
-          {/* <a className="mr-5 hover:text-gray-900">First Link</a> */}
+          {/* ... (your navigation buttons) */}
+          {colorBlind && (
+            <button
+              onClick={() => (window.location.href = "https://www.colorlitelens.com/color-blindness-test.html#Redgreen")}
+              className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
+            >
+              Check Color Blindness
+          </button>
+          )}
           <button
-            className="mr-5"
+            className="mr-5" // Added mb-2 for bottom margin
             aria-label="Click here to go to Job portal"
             onClick={() => navigate("/home")}
           >
@@ -151,12 +157,7 @@ function Navbar() {
           >
             Know About Us and Your Rights
           </button>
-          <button
-  onClick={() => window.location.href = "https://www.colorlitelens.com/color-blindness-test.html#Redgreen"}
-  className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
->
-  Check Color Blindness
-</button>
+          
 
           <select data-choose-theme>
             <option value="">Default</option>

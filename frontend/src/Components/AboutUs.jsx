@@ -61,7 +61,7 @@ function AboutUs() {
 
       <>
         <Para>
-          --------- helps you know your rights so you can protect yourself from
+          RESERVEDIN helps you know your rights so you can protect yourself from
           any kind of exploitation and abuse in your current or future
           workspace.
         </Para>
@@ -81,25 +81,29 @@ function AboutUs() {
           protect yourself from exploitation. For detailed information, visit:
           <br />
         </InPara>
-        <a
-          href="http://www.ccdisabilities.nic.in/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Office of Chief Commissioner for Persons With Disabilities (PWD)
-        </a>{" "}
-        <br />
-        <a
-          href="https://thenationaltrust.gov.in/content/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          National Trust For Social Justice for Persons With Disabilities (PWD)
-        </a>
-        <section className="text-gray-600 body-font">
-          {/* Rest of the component code remains unchanged */}
-        </section>
-      </>
+        
+  <a
+    href="http://www.ccdisabilities.nic.in/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: "blue" }} // Set the color to blue
+  >
+    Office of Chief Commissioner for Persons With Disabilities (PWD)
+  </a>{" "}
+  <br />
+  <a
+    href="https://thenationaltrust.gov.in/content/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: "blue" }} // Set the color to blue
+  >
+    National Trust For Social Justice for Persons With Disabilities (PWD)
+  </a>
+  <section className="text-gray-600 body-font">
+    {/* Rest of the component code remains unchanged */}
+  </section>
+</>
+
 
       <div className="container mx-auto mt-8">
         <div className="flex justify-center">
@@ -130,23 +134,19 @@ function AboutUs() {
                 <img
                   alt="testimonial"
                   className="w-80 h-80 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://media.istockphoto.com/id/1227303423/photo/3d-illustration-of-smiling-man-with-laptop-and-bulb-over-head-sitting-in-armchair-cartoon.jpg?s=612x612&w=0&k=20&c=K5VmZBgcFK40JJ1QDUJXXkLq7iKOQ6pHltlyqvm8i7w="
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMYje72Fyb5LPGwtR9kJw7ykunlQWPAcbA5glo_0vyFm1NpJUTr6KVef_qDqR09q54EQ&usqp=CAU"
                   aria-label="person with image"
                 />
                 <p className="leading-relaxed">
-                  Welcome to --------, a groundbreaking project dedicated to
-                  transforming the landscape of employment for individuals with
-                  disabilities. At EmpowerJobs, we believe in breaking down
-                  barriers and creating equal opportunities for all. Our job
-                  portal is more than just a platform; it's a gateway to
-                  empowerment, connecting talented individuals with disabilities
-                  to a diverse range of professional opportunities.
+                Welcome to RESERVEDIN,
+ a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
                   Vaibhav Gawad
                 </h2>
-                <p className="text-gray-500">AI/ML and Backend Devloper</p>
+                <p className="text-gray-500">AI/ML and Backend Developer</p>
               </div>
             </div>
             <div className="lg:w-1/4 lg:mb-0 mb-6 p-4">
@@ -161,23 +161,19 @@ function AboutUs() {
                 <img
                   alt="testimonial"
                   className="w-80 h-80 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://media.istockphoto.com/id/1227303423/photo/3d-illustration-of-smiling-man-with-laptop-and-bulb-over-head-sitting-in-armchair-cartoon.jpg?s=612x612&w=0&k=20&c=K5VmZBgcFK40JJ1QDUJXXkLq7iKOQ6pHltlyqvm8i7w="
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoCpE-LJIfGebv_V-mTT9EBBaJ5cAVP_T_hKiTvIHcz-tmcnYhMXI7GXSl-hL_4WQttkU&usqp=CAU"
                   aria-label="person with lamp"
                 />
                 <p className="leading-relaxed">
-                  Welcome to --------, a groundbreaking project dedicated to
-                  transforming the landscape of employment for individuals with
-                  disabilities. At EmpowerJobs, we believe in breaking down
-                  barriers and creating equal opportunities for all. Our job
-                  portal is more than just a platform; it's a gateway to
-                  empowerment, connecting talented individuals with disabilities
-                  to a diverse range of professional opportunities.
+                Welcome to RESERVEDIN,
+ a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
                   Sainath Shetty
                 </h2>
-                <p className="text-gray-500">AI/ML dev</p>
+                <p className="text-gray-500">AI/ML Developer</p>
               </div>
             </div>
             <div className="lg:w-1/4 lg:mb-0 p-4">
@@ -192,23 +188,19 @@ function AboutUs() {
                 <img
                   alt="testimonial"
                   className="w-80 h-80 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://media.istockphoto.com/id/1227303423/photo/3d-illustration-of-smiling-man-with-laptop-and-bulb-over-head-sitting-in-armchair-cartoon.jpg?s=612x612&w=0&k=20&c=K5VmZBgcFK40JJ1QDUJXXkLq7iKOQ6pHltlyqvm8i7w="
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPjT1-Ab9elldNYnYo9lfY3kIX1BuDoNtT94tfHTQ7UHqZtJU22rJPcLKFIicQTsl36Ss&usqp=CAU"
                   aria-label="person with image"
                 />
                 <p className="leading-relaxed">
-                  Welcome to -------, a groundbreaking project dedicated to
-                  transforming the landscape of employment for individuals with
-                  disabilities. At EmpowerJobs, we believe in breaking down
-                  barriers and creating equal opportunities for all. Our job
-                  portal is more than just a platform; it's a gateway to
-                  empowerment, connecting talented individuals with disabilities
-                  to a diverse range of professional opportunities.
+                Welcome to RESERVEDIN,
+ a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
                   Varun Iyer
                 </h2>
-                <p className="text-gray-500">Backend dev</p>
+                <p className="text-gray-500">Backend Developer</p>
               </div>
             </div>
             <div className="lg:w-1/4 lg:mb-0 p-4">
@@ -223,23 +215,19 @@ function AboutUs() {
                 <img
                   alt="testimonial"
                   className="w-80 h-80 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://media.istockphoto.com/id/1227303423/photo/3d-illustration-of-smiling-man-with-laptop-and-bulb-over-head-sitting-in-armchair-cartoon.jpg?s=612x612&w=0&k=20&c=K5VmZBgcFK40JJ1QDUJXXkLq7iKOQ6pHltlyqvm8i7w="
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGVaAtc2HMBxAqhjCXGIYtvMlZpYdWQ4LY8DoklwVaJZTf54J_9-04Q0fqW91VsG6Yxnk&usqp=CAU"
                   aria-label="person with lamp"
                 />
                 <p className="leading-relaxed">
-                  Welcome to --------, a groundbreaking project dedicated to
-                  transforming the landscape of employment for individuals with
-                  disabilities. At EmpowerJobs, we believe in breaking down
-                  barriers and creating equal opportunities for all. Our job
-                  portal is more than just a platform; it's a gateway to
-                  empowerment, connecting talented individuals with disabilities
-                  to a diverse range of professional opportunities.
+                Welcome to RESERVEDIN,
+ a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
                   Jason D'souza
                 </h2>
-                <p className="text-gray-500">UI/UX dev</p>
+                <p className="text-gray-500">UI/UX and Frontend Developer</p>
               </div>
             </div>
           </div>
