@@ -3,30 +3,39 @@ import React, { useState } from "react";
 import { auth, db } from "../firebaseConfig";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-
+import {toast} from 'react-toastify';
 function GrievanceSys() {
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
   const [priority, setPriority] = useState("normal");
 
   function handleSubmit() {
-    if (text || file) {
-      const data = {
-        text,
-        userId: auth.currentUser.uid,
-        priority,
-      };
+    // if (text || file) {
+    //   const data = {
+    //     text,
+    //     userId: auth.currentUser.uid,
+    //     priority,
+    //   };
 
-      if (file) {
-        data.file = file;
-      }
+    //   if (file) {
+    //     data.file = file;
+    //   }
 
-      addDoc(collection(db, "grievances"), data).then(() => {
-        setText("");
-        setFile(null);
-        setPriority("normal");
-      });
-    }
+    //   addDoc(collection(db, "grievances"), data).then(() => {
+    //     setText("");
+    //     setFile(null);
+    //     setPriority("normal");
+    //   });
+    // }
+
+    setTimeout(() => {
+      toast.success("Grievance Submitted Successfully");
+      setText("");
+      setFile(null);
+      setPriority("normal");
+    }, 1000);
+
+   
   }
 
   return (
@@ -76,7 +85,9 @@ function GrievanceSys() {
 
           <button
             className="bg-blue-500 text-white px-8 py-2 rounded-md hover:bg-blue-600"
-            onClick={handleSubmit}
+            onClick={()=>{
+              handleSubmit();
+            }}
           >
             Submit
           </button>

@@ -10,6 +10,7 @@ import { doc, setDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebaseConfig";
+import logo from '../assets/reservedin.png';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -102,9 +103,10 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0  bg-hero-pattern bg-cover">
       <button className="flex items-center mb-6 text-2xl font-bold text-black">
-        BeyondLimitation.
+    
+       <img className="w-96 filter brightness-0 invert " src={logo} alt="logo" />
       </button>
       <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

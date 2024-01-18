@@ -14,7 +14,7 @@ export default function JobPortal() {
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-              EmpowerAbility
+              ReservedIn
               <br className="hidden lg:inline-block" />
               Connecting Talents, Transforming Lives
             </h1>
@@ -422,10 +422,10 @@ export default function JobPortal() {
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span class="ml-3 text-xl">EmpowerAbility</span>
+            <span class="ml-3 text-xl">ReservedIn</span>
           </a>
           <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-            © 2024 EmpowerAbility
+            © 2024 ReservedIn
           </p>
           <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a class="text-gray-500">
