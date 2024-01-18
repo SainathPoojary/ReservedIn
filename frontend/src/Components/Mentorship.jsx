@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import mentor1 from "./images/mentor1.jpg";
 import mentor2 from "./images/mentor2.png";
+import mentor3 from "./images/mentor3.jpg";
 import "./Mentorship.css";
 
 function Mentorship() {
@@ -31,7 +32,7 @@ function Mentorship() {
       expertise: "UX Design",
       description: "Dedicated to crafting intuitive and visually appealing user experiences.",
       email: "mentor3@example.com",
-      photo: "mentor3.jpg",
+      photo: mentor3,
       calendlyLink: "https://calendly.com/sainathpoojary/30min",
     },
     // Add more mentors as needed
