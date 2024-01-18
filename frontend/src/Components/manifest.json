@@ -1,0 +1,34 @@
+{
+  "name": "Colorblindly",
+  "version": "2.1",
+  "manifest_version": 3,
+  "description": "Simulates colorblindness in your web browser.",
+  "homepage_url": "https://github.com/oftheheadland",
+  "icons": {
+    "16": "images/eyecon.png",
+    "48": "images/eyecon.png",
+    "128": "images/eyecon.png"
+  },
+  "action": {
+    "default_title": "Colorblindly",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "web_accessible_resources": [{
+    "resources": ["filters/achromatomaly.js",
+    "filters/achromatopsia.js",
+    "filters/deuteranomaly.js",
+    "filters/deuteranopia.js",
+    "filters/normal.js",
+    "filters/protanomaly.js",
+    "filters/protanopia.js",
+    "filters/tritanomaly.js",
+    "filters/tritanopia.js"],
+    "matches": [],
+    "extension_ids": []
+   }]
+}

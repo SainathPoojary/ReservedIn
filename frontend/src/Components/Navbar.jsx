@@ -16,6 +16,11 @@ function Navbar() {
     });
   }, []);
 
+  useEffect(() => {
+    // You may need to implement the logic to control Colorblindly extension
+    // based on the `colorBlind` state
+  }, [colorBlind]);
+
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -94,24 +99,44 @@ function Navbar() {
           <span className="ml-3 text-xl">ReservedIn</span>
         </a>
         <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
-          {/* ... (your navigation buttons) */}
-          {colorBlind && (
-            <a
-              href="https://www.colorlitelens.com/color-blindness-test.html#Redgreen"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
-            >
-              Check Color Blindness
-            </a>
-          )}
-          <button
-            className="mr-5" // Added mb-2 for bottom margin
-            aria-label="Click here to go to Job portal"
-            onClick={() => navigate("/jobs")}
+        <a
+            href="https://www.colorlitelens.com/color-blindness-test.html#Redgreen"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
           >
-            Jobs
-          </button>
+            Check Color Blindness
+          </a>
+
+          <div id="Colorblind-Picker">
+            {/* ... (Colorblindly HTML) */}
+          </div>
+
+          <select data-choose-theme className="mr-2">
+  <option value="">Default</option>
+  <option value="gray">Dark</option>
+  <option value="normal">Trichromacy / Normal</option>
+  <option value="achromatomaly">Blue Cone Monochromacy / Achromatomaly</option>
+  <option value="achromatopsia">Monochromacy / Achromatopsia</option>
+  <option value="deuteranomaly">Green-Weak / Deuteranomaly</option>
+  <option value="deuteranopia">Green-Blind / Deuteranopia</option>
+  <option value="protanomaly">Red-Weak / Protanomaly</option>
+  <option value="protanopia">Red-Blind / Protanopia</option>
+  <option value="tritanomaly">Blue-Weak / Tritanomaly</option>
+  <option value="tritanopia">Blue-Blind / Tritanopia</option>
+</select>
+
+<br />
+
+<button
+  className="mr-5" // Added mb-2 for bottom margin
+  aria-label="Click here to go to Job portal"
+  onClick={() => navigate("/jobs")}
+>
+  Jobs
+</button>
+
+
           <br />
           <button
             className="mr-5"
@@ -159,29 +184,15 @@ function Navbar() {
           >
             About Us
           </button>
-          <button
-            onClick={() =>
-              (window.location.href =
-                "https://www.colorlitelens.com/color-blindness-test.html#Redgreen")
-            }
-            className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
-          >
-            Check Color Blindness
-          </button>
+          
 
-          <select data-choose-theme>
-            <option value="">Default</option>
-            <option value="gray">dark</option>
-            <option value="dark">protanopia</option>
-            <option value="pink">deuteranopia</option>
-            <option value="blue">tritanopia</option>
-          </select>
+          
           <br />
 
           {/* <a className="mr-5 hover:text-gray-900">Second Link</a> */}
           {/* <a className="mr-5 hover:text-gray-900">Third Link</a> */}
           {/* <a className="mr-5 hover:text-gray-900">Fourth Link</a> */}
-        </nav>
+          </nav>
         <TTS />
         <button
           aria-label="to logout press logout"
