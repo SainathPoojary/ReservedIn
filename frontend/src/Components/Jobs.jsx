@@ -4,6 +4,7 @@ import "./Jobs.css";
 import React from "react";
 import Navbar from "./Navbar";
 import datas from "../assets/jobs.json";
+import './bgcolor.css';
 
 // import b_d from './images/b_d.png';
 // import d_d from './images/d_d.jpg';
@@ -411,4 +412,5 @@ function Jobs() {
     </div>
   );
 }
-export default Jobs;
+
+

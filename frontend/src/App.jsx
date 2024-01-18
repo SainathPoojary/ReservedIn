@@ -11,6 +11,7 @@ import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Register from "./Components/Register";
 import Blogs from "./Components/Blogs";
+import Mentorship from "./Components/Mentorship";
 import GrievanceSys from "./Components/GrievanceSys";
 import CoursePage from "./Components/CoursePage";
 import Navbar from "./Components/Navbar";
@@ -34,6 +35,8 @@ function App() {
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogpage" element={<BlogPages />} />
+          <Route path="/mentorship" element={<Mentorship />} />
           <Route path="/grievance" element={<GrievanceSys />} />
           <Route path="/coursepage" element={<CoursePage />} />
           <Route path="/course" element={<Course />} />
@@ -45,8 +48,11 @@ function App() {
           <Route path="/createBlog" element={<CreateBlog />} />
         </Routes>
       </BrowserRouter>
+      
     </div>
   );
 }
 
 export default App;
+
+

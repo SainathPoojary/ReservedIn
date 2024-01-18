@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 import TTS from "./TTS";
+import './bgcolor.css';
+
 
 function Navbar() {
   const navigate = useNavigate();
@@ -93,7 +95,7 @@ function Navbar() {
             BeyondLimitation
           </span>
         </a>
-        <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+        <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
           {/* <a className="mr-5 hover:text-gray-900">First Link</a> */}
           <button
             className="mr-5"
@@ -130,18 +132,42 @@ function Navbar() {
           <button
             className="mr-5"
             aria-label="This is grievance page"
+            onClick={() => navigate("/mentorship")}
+          >
+            Mentorships
+          </button>
+          <br />
+          <button
+            className="mr-5"
+            aria-label="This is mentorship page"
             onClick={() => navigate("/grievance")}
           >
-            Grievenace System
+            Grievance System
           </button>
           <button
             className="mr-5"
             aria-label="This is about page"
             onClick={() => navigate("/about")}
           >
-            About
+            Know About Us and Your Rights
           </button>
+          <button
+  onClick={() => window.location.href = "https://www.colorlitelens.com/color-blindness-test.html#Redgreen"}
+  className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
+>
+  Check Color Blindness
+</button>
+
+          <select data-choose-theme>
+            <option value="">Default</option>
+            <option value="gray">dark</option>
+            <option value="dark">protanopia</option>
+            <option value="pink">deuteranopia</option>
+            <option value="blue">tritanopia</option>
+            
+</select>
           <br />
+          
 
           {/* <a className="mr-5 hover:text-gray-900">Second Link</a> */}
           {/* <a className="mr-5 hover:text-gray-900">Third Link</a> */}

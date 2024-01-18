@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Navbar from "./Navbar";
+import React from "react";
+
 const Head = styled.div`
   display: flex;
   flex-direction: row;
@@ -15,15 +17,14 @@ const Head = styled.div`
   font-family: system-ui;
 `;
 const Para = styled.div`
-    
-    font-family:system-ui;
-    font-weight: 20px;
-    font-size:20px;
-    display:flex;
-    padding:10px;
-    margin-left:10px;
-    list-style
+  font-family: system-ui;
+  font-weight: 20px;
+  font-size: 20px;
+  display: flex;
+  padding: 10px;
+  margin-left: 10px;
 `;
+
 const InPara = styled.div`
   font-family: system-ui;
   font-weight: 10px;
@@ -56,18 +57,63 @@ function AboutUs() {
   return (
     <>
       <Navbar />
-      <Head>About-Us</Head>
+      <Head>Know About Us & Your Rights</Head>
 
-      <Para>
-        Beyond-Limitation we are here with our web app for persons with
-        Disabilities which we think should be Normal.
-      </Para>
-      <Line></Line>
-      <Feature>We provide you with:-</Feature>
-      <InPara>An Exclusive Job Portal</InPara>
-      <InPara>Voice Commands for navigating</InPara>
-      <InPara>Built In Resume generator</InPara>
-      <InPara>Accessibility features to read Blogs</InPara>
+      <>
+        <Para>
+          --------- helps you know your rights so you can protect yourself from
+          any kind of exploitation and abuse in your current or future
+          workspace.
+        </Para>
+        <Line></Line>
+        <Feature>We provide you with:-</Feature>
+        <InPara>An Exclusive Job Portal</InPara>
+        <InPara>Voice Commands for navigating</InPara>
+        <InPara>Built In Resume generator</InPara>
+        <InPara>Accessibility features to read Blogs</InPara>
+        <InPara>
+          Information about your Legal rights and Discourses and Legal Remedies
+          in case of Abuse & Exploitation{" "}
+        </InPara>
+        <InPara>
+          Explore your legal rights and remedies as an individual with
+          disabilities. Learn more about relevant laws and access resources to
+          protect yourself from exploitation. For detailed information, visit:
+          <br />
+        </InPara>
+        <a
+          href="http://www.ccdisabilities.nic.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Office of Chief Commissioner for Persons With Disabilities (PWD)
+        </a>{" "}
+        <br />
+        <a
+          href="https://thenationaltrust.gov.in/content/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          National Trust For Social Justice for Persons With Disabilities (PWD)
+        </a>
+        <section className="text-gray-600 body-font">
+          {/* Rest of the component code remains unchanged */}
+        </section>
+      </>
+
+      <div className="container mx-auto mt-8">
+        <div className="flex justify-center">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/326n18dT8x4?si=ZA9MhHl06ByrDiES"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -88,14 +134,17 @@ function AboutUs() {
                   aria-label="person with image"
                 />
                 <p className="leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Tenetur molestias impedit officiis eius numquam, ratione, quis
-                  vero omnis aliquam, at facere. Alias atque unde sapiente et
-                  odit, in ab labore eius nostrum incidunt libero.
+                  Welcome to --------, a groundbreaking project dedicated to
+                  transforming the landscape of employment for individuals with
+                  disabilities. At EmpowerJobs, we believe in breaking down
+                  barriers and creating equal opportunities for all. Our job
+                  portal is more than just a platform; it's a gateway to
+                  empowerment, connecting talented individuals with disabilities
+                  to a diverse range of professional opportunities.
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
-                  Amrut Raote
+                  Vaibhav Gawad
                 </h2>
                 <p className="text-gray-500">AI/ML and Backend Devloper</p>
               </div>
@@ -116,11 +165,13 @@ function AboutUs() {
                   aria-label="person with lamp"
                 />
                 <p className="leading-relaxed">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Temporibus ratione quia est dolore blanditiis numquam
-                  perspiciatis nostrum, nesciunt ut amet. Aspernatur eaque,
-                  velit aliquam similique mollitia quidem, nemo, eveniet optio
-                  dolor ratione incidunt porro?
+                  Welcome to --------, a groundbreaking project dedicated to
+                  transforming the landscape of employment for individuals with
+                  disabilities. At EmpowerJobs, we believe in breaking down
+                  barriers and creating equal opportunities for all. Our job
+                  portal is more than just a platform; it's a gateway to
+                  empowerment, connecting talented individuals with disabilities
+                  to a diverse range of professional opportunities.
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
@@ -145,14 +196,17 @@ function AboutUs() {
                   aria-label="person with image"
                 />
                 <p className="leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  accusamus aliquam, inventore quae unde praesentium ducimus
-                  nostrum animi cumque quibusdam aut blanditiis voluptas,
-                  necessitatibus pariatur ea ullam dicta, tempora explicabo !
+                  Welcome to -------, a groundbreaking project dedicated to
+                  transforming the landscape of employment for individuals with
+                  disabilities. At EmpowerJobs, we believe in breaking down
+                  barriers and creating equal opportunities for all. Our job
+                  portal is more than just a platform; it's a gateway to
+                  empowerment, connecting talented individuals with disabilities
+                  to a diverse range of professional opportunities.
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
-                  Dharmesh Marathe
+                  Varun Iyer
                 </h2>
                 <p className="text-gray-500">Backend dev</p>
               </div>
@@ -173,15 +227,17 @@ function AboutUs() {
                   aria-label="person with lamp"
                 />
                 <p className="leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quisquam nulla reprehenderit rerum non, magni consequatur
-                  recusandae sapiente? Alias et eius molestias atque, voluptates
-                  porro illum, magni exercitationem ipsum libero labore
-                  voluptate.
+                  Welcome to --------, a groundbreaking project dedicated to
+                  transforming the landscape of employment for individuals with
+                  disabilities. At EmpowerJobs, we believe in breaking down
+                  barriers and creating equal opportunities for all. Our job
+                  portal is more than just a platform; it's a gateway to
+                  empowerment, connecting talented individuals with disabilities
+                  to a diverse range of professional opportunities.
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
                 <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">
-                  Shubham Nakashe
+                  Jason D'souza
                 </h2>
                 <p className="text-gray-500">UI/UX dev</p>
               </div>
