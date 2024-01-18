@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { applyJob, getJobs } from "../utils/backend";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 // import { confirmAlert } from "react-confirm-alert";
 
 export default function Jobs() {
@@ -29,11 +29,13 @@ export default function Jobs() {
     const userId = localStorage.getItem("userId");
     setModal(true);
 
-    const res = await applyJob(jobId, userId).then((res) => {
-      toast.success("Applied Successfully");
-    } ).catch((err) => {
-      toast.error("Error in Applying");
-    });
+    const res = await applyJob(jobId, userId)
+      .then((res) => {
+        toast.success("Applied Successfully");
+      })
+      .catch((err) => {
+        toast.error("Error in Applying");
+      });
 
     // alert("Applied Successfully");
   };
@@ -50,7 +52,7 @@ export default function Jobs() {
               setCurJobId(job._id);
               setCurJob(job);
             }}
-            className="items-start bg-white mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto"
+            className="w-full items-start bg-white mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto"
           >
             <div className="col-span-11 flex flex-col px-10 text-left">
               <h3 aria-label="Company Name" className="text-sm text-gray-600">
@@ -66,7 +68,7 @@ export default function Jobs() {
                 aria-label="Job Description"
                 className="overflow-hidden pr-7 text-sm"
               >
-                {job.desc}
+                {job.desc.slice(0, 200)}...
               </p>
               <div className="mt-3 flex flex-col space-y-3 text-sm font-medium text-gray-500 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-2">
                 <div className>
@@ -150,8 +152,7 @@ export default function Jobs() {
                     onClick={() => {
                       handleApply(curJobId);
                       setModal(false);
-                    }
-                    }
+                    }}
                     aria-label="Apply Button for Job"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   >

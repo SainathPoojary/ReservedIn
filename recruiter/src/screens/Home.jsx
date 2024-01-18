@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getJobs } from "../utils/backend";
+import { useNavigate } from "react-router";
+import ColorBlindnessFilter from "./ColorBlindnessFilter";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -18,9 +21,17 @@ export default function Home() {
   return (
     <div>
       <Navbar />
+
       <div className="grid grid-cols-2 gap-10 py-10 px-48">
         {jobs.map((job) => (
-          <button className=" w-full items-start bg-white mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
+          <button
+            onClick={() => {
+              navigate(`/job`, {
+                state: job,
+              });
+            }}
+            className=" w-full items-start bg-white mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto"
+          >
             <div className="col-span-11 flex flex-col px-10 text-left">
               <h3 aria-label="Company Name" className="text-sm text-gray-600">
                 {job.company}

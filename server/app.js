@@ -138,6 +138,18 @@ app.get("/user/:id", async (req, res) => {
   }
 });
 
+app.post("/users", async (req, res) => {
+  try {
+    const { userIds } = req.body;
+
+    const users = await User.find({ _id: { $in: userIds } });
+
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+});
+
 app.get("/dashboard", auth, async (req, res) => {
   const { email } = req.user;
 
@@ -241,7 +253,6 @@ app.post("/comments", async (req, res) => {
     // await blog.save();
     blog[0].comments.push(comment._id);
     await blog[0].save();
-    
 
     res.status(201).json(comment);
   } catch (error) {
@@ -325,9 +336,20 @@ app.get("/jobs/user/:id", async (req, res) => {
   }
 });
 
+app.get("/jobs/creator/:id", async (req, res) => {
+  const id = decodeURI(req.params.id);
+  console.log(id);
+  try {
+    const jobs = await Jobs.find({ createdBy: id });
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).send("Something went wrong");
+  }
+});
+
 app.post("/jobs", async (req, res) => {
   try {
-    const { company, position, location, date, tags, desc, applicants } =
+    const { company, position, location, date, tags, desc, createdBy } =
       req.body;
     // validate the fields
     // if (!(company && position && location && date && description && tags && desc && applicants)) {
@@ -343,6 +365,7 @@ app.post("/jobs", async (req, res) => {
       date: date,
       tags: tags,
       desc: desc,
+      createdBy: createdBy,
     });
 
     res.status(201).json(job);

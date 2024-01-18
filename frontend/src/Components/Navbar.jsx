@@ -5,6 +5,8 @@ import { auth } from "../firebaseConfig";
 import TTS from "./TTS";
 import "./bgcolor.css";
 import logo from "../assets/reservedin.png";
+import { applyColorblindFilter } from "../utils/colors";
+
 function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
@@ -147,25 +149,25 @@ function Navbar() {
 
           <div id="Colorblind-Picker">{/* ... (Colorblindly HTML) */}</div>
 
-          <select data-choose-theme className="mr-2">
-            <option value="">Default</option>
-            <option value="gray">Dark</option>
-            <option value="normal">Trichromacy / Normal</option>
-            <option value="achromatomaly">
-              Blue Cone Monochromacy / Achromatomaly
-            </option>
-            <option value="achromatopsia">Monochromacy / Achromatopsia</option>
-            <option value="deuteranomaly">Green-Weak / Deuteranomaly</option>
-            <option value="deuteranopia">Green-Blind / Deuteranopia</option>
-            <option value="protanomaly">Red-Weak / Protanomaly</option>
-            <option value="protanopia">Red-Blind / Protanopia</option>
-            <option value="tritanomaly">Blue-Weak / Tritanomaly</option>
-            <option value="tritanopia">Blue-Blind / Tritanopia</option>
+          <select
+            onChange={(e) => {
+              applyColorblindFilter(e.target.value);
+            }}
+            data-choose-theme
+            className="mr-2"
+          >
+            <option value="normal">Normal</option>
+            <option value="achromatomaly">Achromatomaly</option>
+            <option value="deuteranomaly">Deuteranomaly</option>
+            <option value="deuteranopia">Deuteranopia</option>
+            <option value="protanomaly">Protanomaly</option>
+            <option value="protanopia">Protanopia</option>
+            <option value="tritanomaly">Tritanomaly</option>
+            <option value="tritanopia">Tritanopia</option>
           </select>
         </div>
 
         <TTS />
-    
       </div>
     </header>
   );

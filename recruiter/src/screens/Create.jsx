@@ -2,7 +2,6 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { createJob } from "../utils/backend";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../context/AuthProvider";
 
 export default function Create() {
   const [position, setPosition] = useState("");
@@ -15,14 +14,7 @@ export default function Create() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Google", position, location, date, tags, description);
-    const res = await createJob(
-      "Google",
-      position,
-      location,
-      date,
-      tags,
-      description
-    );
+    const res = await createJob(position, location, date, tags, description);
 
     navigate("/");
 

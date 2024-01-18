@@ -18,7 +18,7 @@ export default function App() {
       element: <Create />,
     },
     {
-      path: "/job/:id",
+      path: "/job",
       element: <Job />,
     },
     {
