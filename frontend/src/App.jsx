@@ -35,7 +35,6 @@ function App() {
           <Route path="/schemes" element={<Schemes />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blogpage" element={<BlogPages />} />
           <Route path="/mentorship" element={<Mentorship />} />
           <Route path="/grievance" element={<GrievanceSys />} />
           <Route path="/coursepage" element={<CoursePage />} />
