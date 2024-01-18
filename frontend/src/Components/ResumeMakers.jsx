@@ -9,6 +9,8 @@ import { useState, useRef, useEffect } from "react";
 import Speech from "speak-tts";
 import Navbar from "./Navbar";
 import { jsPDF } from "jspdf";
+import Template2 from "./Template2";
+import Template3 from "./Template3";
 
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 // import b_d from './images/b_d.png';
@@ -63,7 +65,8 @@ function ResumeMaker() {
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [value, setValue] = useState("");
-
+const [project, setProject] = useState("");
+const  [prodetails, setProdetails] = useState("");
   let status = 0;
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -172,7 +175,8 @@ function ResumeMaker() {
     });
   };
   return (
-    <div className="flex justify-center  ">
+    <div>
+    <div className="flex justify-center    ">
       <div className="rounded  shadow-lg p-20 text-2xl">
         <p className="text-2xl font-bold text-center space-x-5">
           Create your resume here
@@ -312,32 +316,46 @@ function ResumeMaker() {
             </form>
           </div>
 
-          <div
-            id="preview_container flex justify-center  max-w-full p-10 space-x-20"
-            ref={resume_preview_ref}
-          >
-            <h1 className="text-center text-2xl bg-blue-600 rounded-sm text-white">
-              {uname}
-            </h1>
-            <div id="details_div">
-              <p>Qualifications: {qual}</p>
-              <br />
-              <p>Hobbies: {hobbies}</p>
-              <br />
-              <p>Achievements: {achieves}</p>
-              <br />
-              <p>Interested in: {interests}</p>
-              <br />
-              <p>Disability Type: {disability}</p>
-              <br />
-              <p>Email: {email}</p>
-              <br />
-              <p>Contact No: {contact}</p>
-            </div>
-          </div>
+          
         </div>
       </div>
+      
     </div>
+    <h1 className="text-center text-2xl  pt-10">
+      Template No 1
+      </h1>
+    <div className="px-80 pb-80"> 
+    <Template3  uname={uname} 
+          project={project}
+          prodetails={prodetails}
+          contact={contact}
+          interests={interests}
+          disability={disability}
+          hobbies={hobbies}
+          achieves={achieves}
+          email={email}
+          qual={qual}
+          resume_preview_ref={resume_preview_ref}/>  
+    </div>
+    
+    
+    <h1 className="text-center text-2xl  pt-10">
+      Template No 2
+      </h1>
+    <div className="px-80 font-['Open_Sans']"> 
+    <Template2  uname={uname}
+          project={project}
+          prodetails={prodetails}
+          contact={contact}
+          interests={interests}
+          disability={disability}
+          hobbies={hobbies}
+          achieves={achieves}
+          email={email}
+          qual={qual}
+          resume_preview_ref={resume_preview_ref}/>  
+    </div>
+     </div>
   );
 }
 
