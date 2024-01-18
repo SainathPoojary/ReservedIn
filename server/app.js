@@ -224,23 +224,33 @@ app.get("/comments", async (req, res) => {
 
 app.post("/comments", async (req, res) => {
   try {
-    const { comments, sentiment, author, authorImage, blogId } = req.body;
-    // validate the fields
+    const { text, sentiment, author, authorImage, blogId } = req.body;
 
+    // Validate the fields (you can add your own validation logic here)
+
+    // Use await with Comment.create
     const comment = await Comment.create({
-      text: comments,
+      text: text,
       sentiment: sentiment,
       author: author,
       authorImage: authorImage,
-    }).catch((err) => {
-      console.log(err);
     });
-    const blog = await Blog.findById(blogId);
-    const commentId = comment._id;
-    blog.comments.push(commentId);
-    await blog.save();
+    comment._id = comment._id.toString();
+
+    const blog = await Blog.find({ _id: blogId });
+    console.log(blog);
+    // console.log(comment._id.toString());
+    console.log(comment._id.toString());
+    const id = comment._id.toString();
+    console.log(blogId);
+    // await blog.save();
+    blog[0].comments.push(comment._id);
+    await blog[0].save();
+    
+
     res.status(201).json(comment);
   } catch (error) {
+    console.error(error);
     res.status(500).send("Something went wrong");
   }
 });

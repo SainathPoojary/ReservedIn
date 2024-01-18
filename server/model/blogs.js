@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./user");
 
 const blogSchema = new mongoose.Schema({
   authors: {
@@ -26,11 +27,14 @@ const blogSchema = new mongoose.Schema({
   authorId: {
     type: mongoose.Types.ObjectId,
     default: "",
+    ref : 'user'
   },
-  comments : {
+  comments: {
     type: [mongoose.Types.ObjectId],
     default: [],
-  },
+    required: false,
+    ref : "comments"
+},
 });
 
 const Blog = mongoose.model("blogs", blogSchema);
