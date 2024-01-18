@@ -96,12 +96,14 @@ function Navbar() {
         <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
           {/* ... (your navigation buttons) */}
           {colorBlind && (
-            <button
-              onClick={() => (window.location.href = "https://www.colorlitelens.com/color-blindness-test.html#Redgreen")}
+            <a
+              href="https://www.colorlitelens.com/color-blindness-test.html#Redgreen"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
             >
               Check Color Blindness
-          </button>
+            </a>
           )}
           <button
             className="mr-5" // Added mb-2 for bottom margin
