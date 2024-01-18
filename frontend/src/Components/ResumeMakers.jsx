@@ -169,11 +169,6 @@ function ResumeMaker() {
 
       windowWidth: 100,
       windowHeight: 100,
-
-   
-
-
-
     });
   };
   return (
@@ -237,7 +232,7 @@ function ResumeMaker() {
                     onChange={(e) => {
                       setAchieves(e.target.value);
                     }}
-                    onClick={() => start_mic("achievements")}
+                    onFocus={() => start_mic("achievements")}
                     value={achieves}
                   />
                 </div>
@@ -253,7 +248,7 @@ function ResumeMaker() {
                     onChange={(e) => {
                       setInterests(e.target.value);
                     }}
-                    onClick={() => start_mic("interest")}
+                    onFocus={() => start_mic("interest")}
                     value={interests}
                   />
                 </div>
@@ -266,7 +261,7 @@ function ResumeMaker() {
                     onChange={(e) => {
                       setDisabilities(e.target.value);
                     }}
-                    onClick={() => start_mic("disability type")}
+                    onFocus={() => start_mic("disability type")}
                     value={disability}
                   />
                 </div>
@@ -282,7 +277,7 @@ function ResumeMaker() {
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
-                    onClick={() => start_mic("email id")}
+                    onFocus={() => start_mic("email id")}
                     value={email}
                   />
                 </div>
@@ -295,7 +290,7 @@ function ResumeMaker() {
                     onChange={(e) => {
                       setContact(e.target.value);
                     }}
-                    onClick={() => start_mic("contact number")}
+                    onFocus={() => start_mic("contact number")}
                     value={contact}
                   />
                 </div>
@@ -317,7 +312,10 @@ function ResumeMaker() {
             </form>
           </div>
 
-          <div id="preview_container flex justify-center  max-w-full p-10 space-x-20" ref={resume_preview_ref}>
+          <div
+            id="preview_container flex justify-center  max-w-full p-10 space-x-20"
+            ref={resume_preview_ref}
+          >
             <h1 className="text-center text-2xl bg-blue-600 rounded-sm text-white">
               {uname}
             </h1>
