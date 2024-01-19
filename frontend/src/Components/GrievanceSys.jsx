@@ -55,6 +55,7 @@ function GrievanceSys() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter your message"
+            aria-label="Grievance Message"
           ></textarea>
 
           <label htmlFor="file" className="block mb-2">
@@ -76,6 +77,7 @@ function GrievanceSys() {
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
             className="bg-gray-200 p-2 rounded-md w-full mb-5"
+            aria-label="Priority Selection"
           >
             <option value="normal">Normal</option>
             <option value="urgent">Urgent</option>
@@ -85,9 +87,10 @@ function GrievanceSys() {
 
           <button
             className="bg-blue-500 text-white px-8 py-2 rounded-md hover:bg-blue-600"
-            onClick={()=>{
+            onClick={() => {
               handleSubmit();
             }}
+            aria-label="Submit Grievance"
           >
             Submit
           </button>
@@ -99,5 +102,3 @@ function GrievanceSys() {
 }
 
 export default GrievanceSys;
-
-

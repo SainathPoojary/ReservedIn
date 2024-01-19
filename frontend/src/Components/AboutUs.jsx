@@ -57,67 +57,115 @@ function AboutUs() {
   return (
     <>
       <Navbar />
-      <Head>Know About Us & Your Rights</Head>
+      <div className="bg-gray-100">
+        <h1 className="text-4xl font-bold text-center py-8" aria-label="Know About Us & Your Rights">
+          Know About Us & Your Rights
+        </h1>
 
-      <>
-        <Para>
-          RESERVEDIN helps you know your rights so you can protect yourself from
-          any kind of exploitation and abuse in your current or future
-          workspace.
-        </Para>
-        <Line></Line>
-        <Feature>We provide you with:-</Feature>
-        <InPara>An Exclusive Job Portal</InPara>
-        <InPara>Voice Commands for navigating</InPara>
-        <InPara>Built In Resume generator</InPara>
-        <InPara>Accessibility features to read Blogs</InPara>
-        <InPara>
-          Information about your Legal rights and Discourses and Legal Remedies
-          in case of Abuse & Exploitation{" "}
-        </InPara>
-        <InPara>
-          Explore your legal rights and remedies as an individual with
-          disabilities. Learn more about relevant laws and access resources to
-          protect yourself from exploitation. For detailed information, visit:
+        <div className="container mx-auto px-4">
+          <p className="text-lg leading-relaxed mb-8" aria-label="RESERVEDIN helps you know your rights so you can protect yourself from any kind of exploitation and abuse in your current or future workspace.">
+            RESERVEDIN helps you know your rights so you can protect yourself
+            from any kind of exploitation and abuse in your current or future
+            workspace.
+          </p>
+
+          <hr className="border-t-2 border-gray-300 mb-8" />
+
+          <h2 className="text-xl font-bold mb-4" aria-label="We provide you with:-">
+            We provide you with:-
+          </h2>
+
+          <ul className="list-disc pl-6 mb-8">
+            <li aria-label="An Exclusive Job Portal">An Exclusive Job Portal</li>
+            <li aria-label="Voice Commands for navigating">Voice Commands for navigating</li>
+            <li aria-label="Built In Resume generator">Built In Resume generator</li>
+            <li aria-label="Accessibility features to read Blogs">Accessibility features to read Blogs</li>
+            <li aria-label="Information about your Legal rights and Discourses and Legal Remedies in case of Abuse & Exploitation">
+              Information about your Legal rights and Discourses and Legal Remedies
+              in case of Abuse & Exploitation{" "}
+            </li>
+          </ul>
+
+          <p className="mb-8" aria-label="Explore your legal rights and remedies as an individual with disabilities. Learn more about relevant laws and access resources to protect yourself from exploitation. For detailed information, visit:">
+            Explore your legal rights and remedies as an individual with
+            disabilities. Learn more about relevant laws and access resources to
+            protect yourself from exploitation. For detailed information, visit:
+          </p>
+
+          <a
+            href="http://www.ccdisabilities.nic.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500"
+            aria-label="Office of Chief Commissioner for Persons With Disabilities (PWD)"
+          >
+            Office of Chief Commissioner for Persons With Disabilities (PWD)
+          </a>{" "}
           <br />
-        </InPara>
-        
-  <a
-    href="http://www.ccdisabilities.nic.in/"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ color: "blue" }} // Set the color to blue
-  >
-    Office of Chief Commissioner for Persons With Disabilities (PWD)
-  </a>{" "}
-  <br />
-  <a
-    href="https://thenationaltrust.gov.in/content/"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ color: "blue" }} // Set the color to blue
-  >
-    National Trust For Social Justice for Persons With Disabilities (PWD)
-  </a>
-  <section className="text-gray-600 body-font">
-    {/* Rest of the component code remains unchanged */}
-  </section>
-</>
-
-
-      <div className="container mx-auto mt-8">
-        <div className="flex justify-center">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/326n18dT8x4?si=ZA9MhHl06ByrDiES"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
+          <a
+            href="https://thenationaltrust.gov.in/content/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500"
+            aria-label="National Trust For Social Justice for Persons With Disabilities (PWD)"
+          >
+            National Trust For Social Justice for Persons With Disabilities (PWD)
+          </a>
         </div>
       </div>
+
+      <div className="container mx-auto mt-8 relative overflow-hidden">
+  <div className="flex">
+    <div className="w-full sm:w-2/3 lg:w-2/3 flex-shrink-0">
+      <div className="relative w-full h-0" style={{ paddingBottom: "56.25%" }}>
+        <iframe
+          className="absolute top-0 left-0 w-full h-full"
+          src="https://www.youtube.com/embed/326n18dT8x4?si=ZA9MhHl06ByrDiES"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          aria-label="YouTube Video"
+        ></iframe>
+      </div>
+    </div>
+    <div className="hidden lg:flex flex-col w-1/4 lg:w-1/4 ml-4">
+      <iframe
+        className="mb-4"
+        width="100%"
+        height="150"
+        src="https://www.youtube.com/embed/2PnUza4FPz8?si=ZC_UseZx01eor5km"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        aria-label="YouTube Video 1"
+      ></iframe>
+      <iframe
+        className="mb-4"
+        width="100%"
+        height="150"
+        src="https://www.youtube.com/embed/t5vp5ijzRac?si=iBJCEz6TMcw5AhG0"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        aria-label="YouTube Video 2"
+      ></iframe>
+      <iframe
+        className="mb-4"
+        width="100%"
+        height="150"
+        src="https://www.youtube.com/embed/GuRJ5MYUNxU?si=Kyz_AWeDXihuuSq5"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        aria-label="YouTube Video 3"
+      ></iframe>
+    </div>
+  </div>
+</div>
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -138,8 +186,7 @@ function AboutUs() {
                   aria-label="person with image"
                 />
                 <p className="leading-relaxed">
-                Welcome to RESERVEDIN,
- a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+                RESERVEDIN is a groundbreaking initiative empowering differently-abled individuals with meaningful employment opportunities. It champions inclusivity, breaks down barriers, and serves as a dedicated platform connecting employers and job seekers. The mission is to redefine the employment landscape by promoting diversity and recognizing the unique abilities of every individual.
 
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
@@ -165,8 +212,7 @@ function AboutUs() {
                   aria-label="person with lamp"
                 />
                 <p className="leading-relaxed">
-                Welcome to RESERVEDIN,
- a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+                RESERVEDIN is a groundbreaking initiative empowering differently-abled individuals with meaningful employment opportunities. It champions inclusivity, breaks down barriers, and serves as a dedicated platform connecting employers and job seekers. The mission is to redefine the employment landscape by promoting diversity and recognizing the unique abilities of every individual.
 
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
@@ -192,8 +238,7 @@ function AboutUs() {
                   aria-label="person with image"
                 />
                 <p className="leading-relaxed">
-                Welcome to RESERVEDIN,
- a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+                RESERVEDIN is a groundbreaking initiative empowering differently-abled individuals with meaningful employment opportunities. It champions inclusivity, breaks down barriers, and serves as a dedicated platform connecting employers and job seekers. The mission is to redefine the employment landscape by promoting diversity and recognizing the unique abilities of every individual.
 
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
@@ -219,8 +264,7 @@ function AboutUs() {
                   aria-label="person with lamp"
                 />
                 <p className="leading-relaxed">
-                Welcome to RESERVEDIN,
- a groundbreaking initiative designed to empower and connect differently-abled individuals with meaningful employment opportunities. We believe in the immense talents, skills, and potential that everyone possesses, regardless of their abilities. Our job portal is a dedicated platform committed to fostering inclusivity, breaking down barriers, and creating a space where employers and job seekers can come together. At RESERVEDIN, we strive to redefine the landscape of employment by promoting diversity and providing a bridge to fulfilling careers. Join us on this journey towards a more inclusive workforce, where every individual's unique abilities are recognized and celebrated. 
+                RESERVEDIN is a groundbreaking initiative empowering differently-abled individuals with meaningful employment opportunities. It champions inclusivity, breaks down barriers, and serves as a dedicated platform connecting employers and job seekers. The mission is to redefine the employment landscape by promoting diversity and recognizing the unique abilities of every individual.
 
                 </p>
                 <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>

@@ -90,7 +90,7 @@ function Navbar() {
           <br />
           <button
             className="mr-5"
-            aria-label="This is mentorship page"
+            aria-label="This is grievance page"
             onClick={() => navigate("/grievance")}
           >
             Grievance
