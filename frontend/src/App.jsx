@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Course from "./Components/Course";
 import Home from "./Components/Home";
 
@@ -22,20 +22,19 @@ import UserInput from "./Components/UserInput";
 import AboutUs from "./Components/AboutUs";
 import CreateBlog from "./screens/CreateBlog";
 import Jobs from "./Components/Jobs";
-
+import Setting from "./screens/Settings";
 
 function App() {
   return (
     <div>
-       <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={true}
-          theme="light"
-          />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        theme="light"
+      />
       <BrowserRouter>
-
         <Routes>
           {/* <Route path="/" element={<UserInput />} /> */}
           <Route index path="/" element={<Login />} />
@@ -55,7 +54,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/test" element={<UserInput />} />
           <Route path="/createBlog" element={<CreateBlog />} />
-       
+          <Route path="/settings" element={<Setting />} />
         </Routes>
       </BrowserRouter>
     </div>

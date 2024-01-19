@@ -55,6 +55,7 @@ export default function Jobs() {
       <div className="grid grid-cols-2 gap-10 py-10 px-48">
         {jobs.map((job) => (
           <button
+            tabIndex={0}
             onClick={() => {
               setModal(true);
               setCurJobId(job._id);
@@ -63,16 +64,22 @@ export default function Jobs() {
             className="w-full items-start bg-white mx-2 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto"
           >
             <div className="col-span-11 flex flex-col px-10 text-left">
-              <h3 aria-label="Company Name" className="text-sm text-gray-600">
+              <h3
+                tabIndex={0}
+                aria-label="Company Name"
+                className="text-sm text-gray-600"
+              >
                 {job.company}
               </h3>
               <a
+                tabIndex={0}
                 aria-label="Job Position"
                 className="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl"
               >
                 {job.position}
               </a>
               <p
+                tabIndex={0}
                 aria-label="Job Description"
                 className="overflow-hidden pr-7 text-sm"
               >

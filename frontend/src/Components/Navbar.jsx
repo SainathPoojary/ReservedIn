@@ -9,12 +9,13 @@ import { applyColorblindFilter } from "../utils/colors";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
   const [colorBlind, setColorBlind] = useState(true); // Set default value to true
 
   useEffect(() => {
-    onAuthStateChanged(auth, (userCredential) => {
-      setUser(userCredential);
+    const name = localStorage.getItem("name");
+    setUser({
+      name,
     });
   }, []);
 
@@ -137,37 +138,22 @@ function Navbar() {
           </svg>
         </button>
 
-        <div className="flex ">
-          <a
-            href="https://www.colorlitelens.com/color-blindness-test.html#Redgreen"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-5 bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-600 rounded text-base text-white"
-          >
-            Check Color Blindness
-          </a>
-
-          <div id="Colorblind-Picker">{/* ... (Colorblindly HTML) */}</div>
-
-          <select
-            onChange={(e) => {
-              applyColorblindFilter(e.target.value);
-            }}
-            data-choose-theme
-            className="mr-2"
-          >
-            <option value="normal">Normal</option>
-            <option value="achromatomaly">Achromatomaly</option>
-            <option value="deuteranomaly">Deuteranomaly</option>
-            <option value="deuteranopia">Deuteranopia</option>
-            <option value="protanomaly">Protanomaly</option>
-            <option value="protanopia">Protanopia</option>
-            <option value="tritanomaly">Tritanomaly</option>
-            <option value="tritanopia">Tritanopia</option>
-          </select>
-        </div>
-
         <TTS />
+
+        <button
+          onClick={() => {
+            navigate("/settings");
+          }}
+          aria-aria-label="Setting page"
+        >
+          <img
+            className="w-11 h-11 rounded-full"
+            src={`https://ui-avatars.com/api/?name=${
+              user.name || "Sainath Poojary"
+            }`}
+            alt=""
+          />
+        </button>
       </div>
     </header>
   );
