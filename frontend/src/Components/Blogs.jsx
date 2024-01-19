@@ -27,15 +27,15 @@ function Blogs() {
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="mx-auto max-w-2xl lg:mx-0">
+            <div className="mx-auto max-w-2xl lg:mx-0" aria-label="Audible Forum ! Dont Only Read the forum no listen then too!">
               <a
                 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
                 aria-label="This is blog page"
               >
-                Audible Blogs
+                Audible Forum
               </a>
               <p className="mt-2 text-lg leading-8 text-gray-600">
-                Don't only read the blogs, now listen them too!
+                Don't only read the Forum, now listen them too!
               </p>
             </div>
             <div>
