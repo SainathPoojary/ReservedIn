@@ -207,6 +207,8 @@ function Navbar() {
         className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
           Eye Movement Tracking Stop
         </button>
+
+        
         <button 
         onClick={() => {
            fetch("http://127.0.0.1:8000/start/handgestures").then((res) => {
@@ -218,7 +220,7 @@ function Navbar() {
           });
         }}
          className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-          Eye Movement Tracking Start
+          Hand Gestures  Tracking Start
         </button>
         <button 
         onClick={() => {
@@ -231,7 +233,7 @@ function Navbar() {
          });
        }}
         className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-          Eye Movement Tracking Stop
+         Hand Gestures  Tracking Stop
         </button>
 
 
