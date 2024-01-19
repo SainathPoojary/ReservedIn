@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { applyColorblindFilter } from "../utils/colors";
+import { useNavigate } from "react-router-dom";
 
 export default function Setting() {
   const [disabilityType, setDisabilityType] = useState(
     localStorage.getItem("disabilityType") || "Mobility Disabilities"
   );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("disabilityType", disabilityType);
@@ -12,6 +15,20 @@ export default function Setting() {
 
   return (
     <div>
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="absolute top-5 left-5"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          className="w-8 h-8  fill-white"
+        >
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+      </button>
       <div className="bg-hero-pattern bg-cover w-full h-[30vh]"></div>
       <div className="bg-gray-200 min-h-[70vh]">
         <div className="w-[80%] mx-auto">

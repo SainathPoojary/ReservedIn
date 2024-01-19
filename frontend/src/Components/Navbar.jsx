@@ -107,49 +107,13 @@ function Navbar() {
             </button>
 
             <br />
-
-            {/* <a className="mr-5 hover:text-gray-900">Second Link</a> */}
-            {/* <a className="mr-5 hover:text-gray-900">Third Link</a> */}
-            {/* <a className="mr-5 hover:text-gray-900">Fourth Link</a> */}
           </nav>
-          {localStorage.getItem("disabilityType") !== "visually-impaired" && (
-            <div className="flex ">
-              <div id="Colorblind-Picker">{/* ... (Colorblindly HTML) */}</div>
 
-              <select
-                onChange={(e) => {
-                  applyColorblindFilter(e.target.value);
-                }}
-                data-choose-theme
-                className="mr-2"
-              >
-                <option value="normal">Normal</option>
-                <option value="achromatomaly">Achromatomaly</option>
-                <option value="deuteranomaly">Deuteranomaly</option>
-                <option value="deuteranopia">Deuteranopia</option>
-                <option value="protanomaly">Protanomaly</option>
-                <option value="protanopia">Protanopia</option>
-                <option value="tritanomaly">Tritanomaly</option>
-                <option value="tritanopia">Tritanopia</option>
-              </select>
-            </div>
+          {(localStorage.getItem("disabilityType") === "visually-impaired" ||
+            localStorage.getItem("disabilityType") === "color-blind") && (
+            <TTS />
           )}
 
-          <TTS />
-          <button
-          onClick={() => {
-            navigate("/settings");
-          }}
-          aria-aria-label="Setting page"
-        >
-          <img
-            className="w-11 h-11 rounded-full"
-            src={`https://ui-avatars.com/api/?name=${
-              user.name || "Sainath Poojary"
-            }`}
-            alt=""
-          />
-        </button>
           <button
             aria-label="to logout press logout"
             onClick={
@@ -165,82 +129,87 @@ function Navbar() {
             className="inline-flex items-center bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-500 rounded text-base text-white mt-4 md:mt-0"
           >
             {localStorage.getItem("userId") ? "Logout" : "Login"}
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
           </button>
-          
+
+          <button
+            onClick={() => {
+              navigate("/settings");
+            }}
+            className="ml-4"
+            aria-label="Setting page"
+          >
+            <img
+              className="w-11 h-11 rounded-full"
+              src={`https://ui-avatars.com/api/?name=${
+                user.name || "Sainath Poojary"
+              }`}
+              alt=""
+            />
+          </button>
         </div>
       </header>
-      <div className="bg-gray-100 p-4">
-        <button 
-        onClick={() => {
-           fetch("http://127.0.0.1:8000/start/eyemoment").then((res) => {
-            toast.success("Eye Movement Tracking Started");
+      {(localStorage.getItem("disabilityType") === "visually-impaired" ||
+        localStorage.getItem("disabilityType") === "color-blind") && (
+        <div className="bg-gray-100 p-4 text-center">
+          <button
+            onClick={() => {
+              fetch("http://127.0.0.1:8000/start/eyemoment")
+                .then((res) => {
+                  toast.success("Eye Movement Tracking Started");
+                })
+                .catch((err) => {
+                  toast.error("Error in starting Eye Movement Tracking");
+                });
+            }}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+          >
+            Eye Movement Tracking Start
+          </button>
+          <button
+            onClick={() => {
+              fetch("http://127.0.0.1:8000/stop/eyemoment")
+                .then((res) => {
+                  toast.success("Eye Movement Tracking Stoped!");
+                })
+                .catch((err) => {
+                  toast.error("Error in stopping Eye Movement Tracking");
+                });
+            }}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+          >
+            Eye Movement Tracking Stop
+          </button>
 
-          })
-          .catch((err) => {
-            toast.error("Error in starting Eye Movement Tracking");
-          });
-        }}
-         className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-          Eye Movement Tracking Start
-        </button>
-        <button 
-        onClick={() => {
-          fetch("http://127.0.0.1:8000/stop/eyemoment").then((res) => {
-           toast.success("Eye Movement Tracking Stoped!");
-
-         })
-         .catch((err) => {
-           toast.error("Error in stopping Eye Movement Tracking");
-         });
-       }}
-        className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-          Eye Movement Tracking Stop
-        </button>
-
-        
-        <button 
-        onClick={() => {
-           fetch("http://127.0.0.1:8000/start/handgestures").then((res) => {
-            toast.success("Hand Gestures  Tracking Started");
-
-          })
-          .catch((err) => {
-            toast.error("Error in startingHand Gestures Tracking");
-          });
-        }}
-         className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-          Hand Gestures  Tracking Start
-        </button>
-        <button 
-        onClick={() => {
-          fetch("http://127.0.0.1:8000/stop/handgestures").then((res) => {
-           toast.success("Hand Gestures Tracking Stoped!");
-
-         })
-         .catch((err) => {
-           toast.error("Error in stopping Hand Gestures Tracking");
-         });
-       }}
-        className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-         Hand Gestures  Tracking Stop
-        </button>
-
-
-   
-
-        
-      </div>
+          <button
+            onClick={() => {
+              fetch("http://127.0.0.1:8000/start/handgestures")
+                .then((res) => {
+                  toast.success("Hand Gestures  Tracking Started");
+                })
+                .catch((err) => {
+                  toast.error("Error in startingHand Gestures Tracking");
+                });
+            }}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+          >
+            Hand Gestures Tracking Start
+          </button>
+          <button
+            onClick={() => {
+              fetch("http://127.0.0.1:8000/stop/handgestures")
+                .then((res) => {
+                  toast.success("Hand Gestures Tracking Stoped!");
+                })
+                .catch((err) => {
+                  toast.error("Error in stopping Hand Gestures Tracking");
+                });
+            }}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+          >
+            Hand Gestures Tracking Stop
+          </button>
+        </div>
+      )}
     </div>
   );
 }
