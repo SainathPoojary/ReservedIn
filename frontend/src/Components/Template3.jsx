@@ -42,7 +42,7 @@ function Template3(props) {
      
     </div>
          
-<div class="container mx-auto py-8 px-4" ref={cardRef}>
+<div class="container mx-auto  px-4" ref={cardRef}>
     <div class="bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-3xl font-semibold">{uname}</h1>
         <p class="text-gray-600">Web Developer</p>

@@ -240,8 +240,8 @@ const handleSubmit =async () => {
   return (
     <div>
     <div className="flex justify-center    pt-10">
-      <div className="rounded  shadow-lg p-6 text-2xl">
-        <p className="text-4xl font-bold p-2 text-center space-x-5">
+      <div className="rounded  shadow-lg p-2 text-2xl font-['Open_Sans'] ">
+        <p className="text-4xl font-bold p-2 text-center space-x-5 pb-8">
           Create your resume here
         </p>
         <div className="  flex justify-between">
@@ -388,10 +388,10 @@ const handleSubmit =async () => {
       </div>
       
     </div>
-    <h1 className="text-center text-2xl  pt-10">
+    <h1 className="text-center text-2xl  pt-10 pb-4 font-semibold bg-slate-100">
       Template No 1
       </h1>
-    <div className="px-80 pb-80"> 
+    <div className="px-80 "> 
     <Template3  uname={uname} 
           project={project}
           prodetails={prodetails}
@@ -406,7 +406,7 @@ const handleSubmit =async () => {
     </div>
     
     
-    <h1 className="text-center text-2xl  pt-10">
+    <h1 className="text-center text-2xl  pt-10 pb-4 font-semibold bg-slate-100">
       Template No 2
       </h1>
     <div className="px-80 font-['Open_Sans']"> 
@@ -422,7 +422,11 @@ const handleSubmit =async () => {
           qual={qual}
           resume_preview_ref={resume_preview_ref}/>  
     </div>
+    <h1 className="text-center text-2xl  pt-10 pb-4 font-semibold bg-slate-100">
+      More Templates Coming Soon......
+      </h1>     
      </div>
+
   );
 }
 
