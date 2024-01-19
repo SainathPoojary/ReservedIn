@@ -137,6 +137,20 @@ function Navbar() {
 
           <TTS />
           <button
+          onClick={() => {
+            navigate("/settings");
+          }}
+          aria-aria-label="Setting page"
+        >
+          <img
+            className="w-11 h-11 rounded-full"
+            src={`https://ui-avatars.com/api/?name=${
+              user.name || "Sainath Poojary"
+            }`}
+            alt=""
+          />
+        </button>
+          <button
             aria-label="to logout press logout"
             onClick={
               localStorage.getItem("userId")
@@ -163,6 +177,7 @@ function Navbar() {
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </button>
+          
         </div>
       </header>
       <div className="bg-gray-100 p-4">
@@ -192,23 +207,37 @@ function Navbar() {
         className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
           Eye Movement Tracking Stop
         </button>
+        <button 
+        onClick={() => {
+           fetch("http://127.0.0.1:8000/start/handgestures").then((res) => {
+            toast.success("Hand Gestures  Tracking Started");
 
-        <TTS />
-
-        <button
-          onClick={() => {
-            navigate("/settings");
-          }}
-          aria-aria-label="Setting page"
-        >
-          <img
-            className="w-11 h-11 rounded-full"
-            src={`https://ui-avatars.com/api/?name=${
-              user.name || "Sainath Poojary"
-            }`}
-            alt=""
-          />
+          })
+          .catch((err) => {
+            toast.error("Error in startingHand Gestures Tracking");
+          });
+        }}
+         className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+          Eye Movement Tracking Start
         </button>
+        <button 
+        onClick={() => {
+          fetch("http://127.0.0.1:8000/stop/handgestures").then((res) => {
+           toast.success("Hand Gestures Tracking Stoped!");
+
+         })
+         .catch((err) => {
+           toast.error("Error in stopping Hand Gestures Tracking");
+         });
+       }}
+        className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+          Eye Movement Tracking Stop
+        </button>
+
+
+   
+
+        
       </div>
     </div>
   );
