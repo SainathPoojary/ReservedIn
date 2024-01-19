@@ -11,6 +11,7 @@ import Navbar from "./Navbar";
 import { jsPDF } from "jspdf";
 import Template2 from "./Template2";
 import Template3 from "./Template3";
+import { toast } from "react-toastify";
 
 // import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 // import b_d from './images/b_d.png';
@@ -55,6 +56,9 @@ recognition.maxAlternatives = 1;
 //     )
 // }
 
+
+
+
 function ResumeMaker() {
   const [uname, setName] = useState("");
   const [qual, setQual] = useState("");
@@ -67,6 +71,36 @@ function ResumeMaker() {
   const [value, setValue] = useState("");
 const [project, setProject] = useState("");
 const  [prodetails, setProdetails] = useState("");
+const handleSubmit =async () => {
+
+    const dat =  fetch("http://localhost:4000/resume", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: uname,
+        qualifications: qual,
+        hobbies: hobbies,
+        achievements: achieves,
+        interestedIn: interests,
+        disabilityType: disability,
+        email: email,
+        contact: contact,
+        userId: localStorage.getItem("userId"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // window.location.reload();
+        toast.success("Resume Created Successfully");
+      })
+      .catch((err) =>{ console.log(err);
+      
+      toast.error("Resume Not Created");});
+  
+};
   let status = 0;
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -174,16 +208,45 @@ const  [prodetails, setProdetails] = useState("");
       windowHeight: 100,
     });
   };
+
+  const gatherData = async () => {
+    const data = await fetch(`http://localhost:4000/resume/${localStorage.getItem('userId')}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      data = data[0];
+
+      setName(data.name);
+      setQual(data.qualifications);
+      setHobbies(data.hobbies);
+      setAchieves(data.achievements);
+      setInterests(data.interestedIn);
+      setDisabilities(data.disabilityType);
+      setEmail(data.email);
+      setContact(data.contact);
+    })
+    .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    gatherData();
+  }
+  ,[]);
+
   return (
     <div>
-    <div className="flex justify-center    ">
-      <div className="rounded  shadow-lg p-20 text-2xl">
-        <p className="text-2xl font-bold text-center space-x-5">
+    <div className="flex justify-center    pt-10">
+      <div className="rounded  shadow-lg p-6 text-2xl">
+        <p className="text-4xl font-bold p-2 text-center space-x-5">
           Create your resume here
         </p>
         <div className="  flex justify-between">
           <div id="input_fields_container" className="space-y-6 space-x-2">
-            <form>
+            <div>
               <div className="flex justify-between">
                 <div className="w-1/2">
                   <h3 className="input_labels">Name</h3>
@@ -191,6 +254,7 @@ const  [prodetails, setProdetails] = useState("");
                     type="text"
                     className="inputs"
                     id="first_name"
+                    aria-label="What is Your Name?"
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
@@ -204,6 +268,7 @@ const  [prodetails, setProdetails] = useState("");
                     type="text"
                     className="inputs"
                     id="last_name"
+                    aria-label="What is Your Qualification?"
                     onChange={(e) => {
                       setQual(e.target.value);
                     }}
@@ -219,6 +284,7 @@ const  [prodetails, setProdetails] = useState("");
                   <input
                     type="text"
                     className="inputs"
+                    aria-label="What are Your Hobbies?"
                     id="first_name"
                     onChange={(e) => {
                       setHobbies(e.target.value);
@@ -232,6 +298,7 @@ const  [prodetails, setProdetails] = useState("");
                   <input
                     type="text"
                     className="inputs"
+                    aria-label="What are Your Achievements?"
                     id="last_name"
                     onChange={(e) => {
                       setAchieves(e.target.value);
@@ -247,6 +314,7 @@ const  [prodetails, setProdetails] = useState("");
                   <h3 className="input_labels">Interested in</h3>
                   <input
                     type="text"
+                    aria-label="What are Your Interests?"
                     className="inputs"
                     id="first_name"
                     onChange={(e) => {
@@ -261,6 +329,7 @@ const  [prodetails, setProdetails] = useState("");
                   <input
                     type="text"
                     className="inputs"
+                    aria-label="What is Your Disability Type?"
                     id="last_name"
                     onChange={(e) => {
                       setDisabilities(e.target.value);
@@ -276,6 +345,7 @@ const  [prodetails, setProdetails] = useState("");
                   <h3 className="input_labels">Email</h3>
                   <input
                     type="text"
+                    aria-label="What is Your Email?"
                     className="inputs"
                     id="first_name"
                     onChange={(e) => {
@@ -288,6 +358,7 @@ const  [prodetails, setProdetails] = useState("");
                 <div className="w-1/2">
                   <h3 className="input_labels">Contact No</h3>
                   <input
+                    aria-label="What is Your Contact Number?"
                     type="text"
                     className="inputs"
                     id="last_name"
@@ -301,19 +372,15 @@ const  [prodetails, setProdetails] = useState("");
               </div>
 
               <div className="flex justify-center space-x-5">
-                <input
-                  type="submit"
+                <button
+                 
                   className="bg-blue-600 p-1.5 text-white rounded-md ml-1 hover:bg-blue-700"
                   id="submit_btn"
-                ></input>
-                <button
-                  className="bg-blue-600 p-1.5 text-white rounded-md ml-1 hover:bg-blue-700"
-                  onClick={handleGeneratePDF}
-                >
-                  Generate PDF
-                </button>
+                  onClick={()=>handleSubmit()}
+                >Submit</button>
+               
               </div>
-            </form>
+            </div>
           </div>
 
           

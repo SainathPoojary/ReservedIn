@@ -24,6 +24,7 @@ export default function JobPortal() {
             </p>
             <div className="flex justify-center">
               <button
+                
                 onClick={() => {
                   window.location.href = "#jobs";
                 }}
@@ -31,8 +32,11 @@ export default function JobPortal() {
               >
                 Explore
               </button>
-              <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded-lg text-lg">
-                Blogs
+              <button onClick={()=>{
+                
+                navigate("/blogs")
+              }} className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded-lg text-lg">
+                Forum
               </button>
             </div>
           </div>
@@ -43,21 +47,24 @@ export default function JobPortal() {
       </section>
 
       {/* Working */}
-      <section className="text-gray-600 bg-[#dfe9fa] body-font ">
+      <section aria-label="Banner animation" className="text-gray-600 bg-[#dfe9fa] body-font ">
         <div className="container px-5 py-10  flex flex-wrap w-4/5 mx-auto">
           <div className="flex flex-wrap w-full items-center justify-between">
             <Lottie
               className="lg:w-1/2 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
               animationData={jobAnimation}
+              
               loop={true}
             />
-            <div className="lg:w-1/2 md:w-1/2 md:pr-10 md:py-6 flex flex-col">
+            <div className="lg:w-1/2 md:w-1/2 md:pr-10 md:py-6 flex flex-col" tabindex="0" aria-label="This section is talk about mentorship" >
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none" />
                 </div>
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 inline-flex items-center justify-center text-white relative z-10">
                   <svg
+
+
                     fill="none"
                     stroke="currentColor"
                     strokeLinecap="round"
@@ -261,11 +268,16 @@ export default function JobPortal() {
       {/* Jobs */}
       <section id="jobs" className=" py-16">
         <div className="w-4/5 mx-auto">
-          <h1 className="text-4xl text-center text-black">Jobs</h1>
+          <h1 className="text-4xl text-center text-black" aria-label="Jobs Section">
+          <a
+                  href="#"  aria-label="Jobs Section"
+                  >Jobs </a>
+            </h1>
           <div className="">
             <div className="group bg-white mx-2 mt-10 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
               <a
                 href="#"
+                aria-label="Apple logo"
                 className="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4"
               >
                 <div className="group relative h-16 w-16 overflow-hidden rounded-lg">
@@ -279,7 +291,7 @@ export default function JobPortal() {
               <div className="col-span-11 flex flex-col pr-8 text-left sm:pl-4">
                 <h3 className="text-sm text-gray-600">Invision</h3>
                 <a
-                  href="#"
+                  href="#"  aria-label="Apple logo"
                   className="mb-3 overflow-hidden pr-7 text-lg font-semibold sm:text-xl"
                 >
                   {" "}
@@ -308,7 +320,7 @@ export default function JobPortal() {
             </div>
             <div className="group bg-white mx-2 mt-10 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
               <a
-                href="#"
+                href="#"   aria-label="Apple logo"
                 className="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4"
               >
                 <div className="group relative h-16 w-16 overflow-hidden rounded-lg">
@@ -352,12 +364,13 @@ export default function JobPortal() {
             <div className="group bg-white mx-2 mt-10 grid max-w-screen-md grid-cols-12 space-x-8 overflow-hidden rounded-lg border py-8 text-gray-700 shadow transition hover:shadow-lg sm:mx-auto">
               <a
                 href="#"
+                
                 className="order-2 col-span-1 mt-4 -ml-14 text-left text-gray-600 hover:text-gray-700 sm:-order-1 sm:ml-4"
               >
                 <div className="group relative h-16 w-16 overflow-hidden rounded-lg">
                   <img
                     src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8ed3d547-94ff-48e1-9f20-8c14a7030a02_2000x2000.jpeg"
-                    alt=""
+                    alt="apple logo"
                     className="h-full w-full object-cover text-gray-700"
                   />
                 </div>

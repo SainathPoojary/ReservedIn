@@ -292,7 +292,31 @@ app.post("/resume", async (req, res) => {
     email,
     userId,
   } = req.body;
+  console.log(req.body);
   try {
+    const isAllready = await Resume.findOne({ userId: userId });
+
+    if(isAllready){
+    
+      const resume = await Resume.findOneAndUpdate(
+        { userId: userId },
+        {
+          name: name,
+          contact: contact,
+          qualifications: qualifications,
+          hobbies: hobbies,
+          achievements: achievements,
+          interestedIn: interestedIn,
+          disabilityType: disabilityType,
+          email: email,
+          userId: userId,
+        }
+      );
+      res.status(201).json(resume);
+      return;
+    }
+
+
     const resume = await Resume.create({
       name: name,
       contact: contact,
@@ -304,6 +328,7 @@ app.post("/resume", async (req, res) => {
       email: email,
       userId: userId,
     });
+
     res.status(201).json(resume);
   } catch (error) {
     res.status(500).send("Something went wrong");
